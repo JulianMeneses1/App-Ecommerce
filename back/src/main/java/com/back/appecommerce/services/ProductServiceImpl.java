@@ -48,13 +48,18 @@ public class ProductServiceImpl implements ProductService{
     public Optional<Product> update(Product product, Long id) {
         Optional <Product> o = repository.findById(id);
         if (o.isPresent()) {
-            repository.save(o.orElseThrow());
-            return o;
+            Product productDb = o.orElseThrow();
+            productDb.setTitle(product.getTitle());
+            productDb.setDescription(product.getDescription());
+            productDb.setPrice(product.getPrice());
+            productDb.setImage(product.getImage());
+            productDb.setCategory(product.getCategory());
+            repository.save(productDb);
+            return Optional.ofNullable(productDb);
         }
         return Optional.empty();
-    }   
-  
-
+    }    
+    
     @Override
     @Transactional(readOnly=true)
     public Optional<Product> findById(Long id) {

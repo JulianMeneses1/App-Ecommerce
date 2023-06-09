@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -44,9 +43,10 @@ public class ProductController {
     
     @GetMapping("/category/{name}")
     public ResponseEntity<?> getProducts (@PathVariable String name, 
-                                      @RequestParam(value= "page", required = false, defaultValue="0") int page) {
+                                          @RequestParam(value= "page", required = false, defaultValue="0") int page,
+                                          @RequestParam(value= "size", required = false, defaultValue="5") int size) {
         
-        Pageable pageable = PageRequest.of(page, 5);
+        Pageable pageable = PageRequest.of(page, size);
         Optional <Category> optionalCategory = categoryService.findByName(name);
         if (optionalCategory.isPresent()) {
             return ResponseEntity.ok(productService.findByCategory(pageable, optionalCategory.orElseThrow()));
@@ -88,9 +88,9 @@ public class ProductController {
          if(result.hasErrors()){
             return validation(result);
         }         
-        Optional<Product> optionalUser = productService.update (product, id);
-        if (optionalUser.isPresent()) {
-            return ResponseEntity.status(HttpStatus.CREATED).body(optionalUser.orElseThrow());
+        Optional<Product> optionalProduct = productService.update (product, id);
+        if (optionalProduct.isPresent()) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(optionalProduct.orElseThrow());
         }
         return ResponseEntity.notFound().build();
 

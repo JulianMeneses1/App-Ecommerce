@@ -25,12 +25,12 @@ public class Product {
     private Long id;
     
     @NotBlank
-    @Size(min = 6, max = 60, message = "debe tener entre 6 y 80 caracteres")
+    @Size(min = 6, max = 150, message = "debe tener entre 6 y 150 caracteres")
     @Column (unique = true)
     private String title;  
     
     @NotBlank
-    @Size(min = 50, max = 500, message = "debe tener entre 3 y 20 caracteres")
+    @Size(min = 20, max = 300, message = "debe tener entre 20 y 300 caracteres")
     @Column(length = 500)
     private String description;
     
@@ -41,6 +41,6 @@ public class Product {
     private String image; 
     
     @ManyToOne
-    @JoinColumn (name = "product_id")
+    @JoinColumn (name = "category_id")
     private Category category;
 }
