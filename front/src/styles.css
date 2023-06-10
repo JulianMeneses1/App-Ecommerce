@@ -1,0 +1,26 @@
+/* Navbar */
+
+nav .nav-link{
+    color: white !important;
+}
+
+.navbar-brand {
+    font-family: 'Permanent Marker', serif;
+    font-size: 40px;
+}
+
+nav, nav .dropdown-menu {
+    background-color: #444455;
+}
+
+nav .dropdown-menu .nav-link:hover {
+    background-color:#585880
+}
+
+nav .item:hover {   
+    transform: scale(1.10);   
+}
+
+nav svg:hover {
+    transform: scale(1.20);
+}

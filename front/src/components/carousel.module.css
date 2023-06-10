@@ -1,0 +1,34 @@
+.cardModule {
+    width: calc(100%/3);
+}
+
+.carouselControlPrev{
+    justify-content: start;
+    width: auto;
+    top: 45%;
+    bottom: 45%;
+    background-color: rgb(177, 174, 174);
+    left: 0.3%
+}
+.carouselControlPrev:focus{
+    
+    background-color: rgb(177, 174, 174);
+    
+}
+
+.carouselControlNext{
+    justify-content: start;
+    width: auto;
+    top: 45%;
+    bottom: 45%;
+    background-color: rgb(177, 174, 174);
+    right: 0.3%
+
+}
+
+@media screen and (max-width: 600px) {
+    .cardModule {
+        width: calc(100%/2);
+    }
+}
+
