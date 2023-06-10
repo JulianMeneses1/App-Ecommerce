@@ -1,3 +1,20 @@
 .navLink:hover {
     color: blue
 }
+
+@media screen and (min-width: 1400px) {
+    .cardModule {
+        width: 20%;
+    }  
+}
+
+@media screen and (min-width: 900px) {
+    .cardModule {
+        width: 30%;
+    }  
+}
+@media screen and (max-width: 899px) {
+    .cardModule {
+        width: 40%;
+    }  
+}
