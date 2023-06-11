@@ -1,7 +1,10 @@
 .footer {
     background-color:#444455;
-    padding: 10px 0px;
-    height: 10vh;
+    padding: 0.8em 0;   
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+
 }
 
 .navLink:link, .navLink:visited{

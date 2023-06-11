@@ -3,22 +3,24 @@ import { Home } from "../pages/Home"
 import { Navbar } from "../components/shared/Navbar"
 import { Footer } from "../components/shared/Footer"
 import { ProductsByCategory } from "../pages/ProductsByCategory"
-import { Login } from "../pages/Login"
+import { LoginRegister } from "../auth/pages/LoginRegister"
 import { NewProduct } from "../pages/NewProduct"
-import { Register } from "../pages/Register"
 import { Cart } from "../pages/Cart"
 import { ProductDetails } from "../pages/ProductDetails"
+import { useSelector } from "react-redux"
 
 export const AppRoutes = () => {
+
+    const { isAdmin } = useSelector(state => state.auth);
+
     return (
         <>       
             <Navbar/>
             <Routes>
                 <Route path='/' element={ <Home/> } />
-                <Route path='/:category' element={ <ProductsByCategory/> } />
-                <Route path='/login' element={ <Login/> } />
-                <Route path='/registrarse' element={ <Register/> } />
-                <Route path='/crear-producto' element={ <NewProduct/> } />
+                <Route path='/categoría/:category' element={ <ProductsByCategory/> } />
+                <Route path='/login' element={ <LoginRegister/> } />
+                { isAdmin && <Route path='/crear-producto' element={ <NewProduct/> } />}
                 <Route path='/carrito-compras' element={ <Cart/> } />
                 <Route path='/producto/:id' element={ <ProductDetails/> } />
                 <Route path='/*' element= { <Navigate to='/'/> } />

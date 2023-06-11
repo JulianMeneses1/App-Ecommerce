@@ -2,80 +2,73 @@ import { useForm } from "react-hook-form";
 
 export const NewProduct = () => {
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, getValues, watch, formState: { errors }, clearErrors, reset } = useForm();
+
+    const watchAllFields = watch(); 
 
     const onSubmit = data => console.log(data);
 
-    console.log(watch("title"))
-
     return (
         <>
-            <div className="formularioEvent container my-4">
+            <div className="formEvent container my-4 d-flex align-items-center">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <h2>Crear Producto</h2>
                     <div className="row">
                         <div className="col-xxl-4 col-lg-6 col-md-12 my-1">
                             <label htmlFor="title" className="form-label">Título</label>
-                            <input                       
-                                className="form-control"    
+                            <input                     
                                 type="text" 
                                 placeholder="Título del producto"                       
                                 id="title"
-                                maxLength="150"
-                                {...register("title", { required: true })}
+                                maxLength="100"
+                                {...register("title", { required: true, minLength: 6 })}
+                                className={`form-control ${watchAllFields?.title?.length > 5 && 'is-valid'} ${errors.title && 'is-invalid'}`}
                             />
-                            {errors.titleRequired
-                                ? <p className="text-danger m-0">Este campo es obligatorio</p> 
-                                : <p className="text-success m-0">Correcto!</p>
-                            }                            
+                           {errors.title?.type === 'required' && <p className="text-danger mb-0">El título es obligatorio</p>}
+                           {errors.title?.type === 'minLength' && <p className="text-danger mb-0">El título debe tener mínimo 6 caracteres</p>}                         
                         </div>
                         <div className="col-xxl-4 col-lg-6 col-md-12 my-1">
                             <label htmlFor="description" className="form-label">Descripción</label>
-                            <textarea                       
-                                className="form-control"    
+                            <textarea                      
                                 type="text"                       
-                                maxLength="300"
+                                maxLength="200"
+                                onClick={() => clearErrors("description")}
                                 id="description"
                                 placeholder="Descripción del producto"
+                                {...register("description", { required: true, minLength: 20})}
+                                className={`form-control ${watchAllFields?.description?.length > 19 && 'is-valid'} ${errors.description && 'is-invalid'}`} 
                                 />
-                            <p 
-                                className="text-danger m-0" 
-                                >
-                                Este campo es obligatorio
-                            </p>    
+                            {errors.description?.type === 'required' && <p className="text-danger mb-0">La descripción es obligatoria</p>}
+                            {errors.description?.type === 'minLength' && <p className="text-danger mb-0">La descripción debe tener mínimo 20 caracteres</p>}   
                         </div>
                         <div className="col-xxl-4 col-lg-6 col-md-12 my-1">
                             <label htmlFor="price" className="form-label">Precio</label>
                             <input                       
-                                className="form-control"    
-                                type="text" 
+                                type="number" 
                                 placeholder="Precio del evento"                        
                                 id="price"
-                                maxLength="9"
+                                {...register("price", { required: true, min: 0, max:10000000})}
+                                className={`form-control ${(watchAllFields?.price > 0 && watchAllFields?.price < 10000000) && 'is-valid'} ${errors.price && 'is-invalid'}`} 
                                 />
-                            <p 
-                                className="text-danger m-0" 
-                                >
-                                Este campo es obligatorio
-                            </p>
+                            {errors.price?.type === 'required' && <p className="text-danger mb-0">El precio es obligatorio</p>}
+                            {(errors.price?.type === 'max' || errors.price?.type === 'min')  
+                                && <p className="text-danger mb-0">El precio no puede ser negativo o mayor a diez millones!</p>}
                         </div>
                         <div className="col-xxl-4 col-lg-6 col-md-12 my-1">
                             <label htmlFor="category" className="form-label">Categoría</label>
                             <select 
-                                className="form-control" 
-                                id="category"                         
+                                className="form-select" 
+                                id="category"
+                                {...register("category", {required:true})}                         
                             >
-                                <option defaultValue="1">Notebook</option>
+                                <option value="">Seleccione una categoría</option>
+                                <option value="1">Notebook</option>
                                 <option value="2">Monitor</option>
                                 <option vale="3">PC de Escritorio</option>
                                 <option value="4">Placa de Video</option>                        
                                 <option value="5">Microprocesador</option>                        
                             </select>
-                            <p 
-                                className="text-danger m-0" 
-                            >
-                                Este campo es obligatorio
-                            </p>                 
+                            {errors.category?.type == 'required' && <p className="text-danger mb-0">Debe elegir una categoría</p>}
                         </div>            
                         <div className="col-xxl-4 col-lg-6 col-md-12 my-1">
                             <label htmlFor="image" className="form-label">Imagen</label>
@@ -84,18 +77,15 @@ export const NewProduct = () => {
                                 type="file"                       
                                 id="image"
                                 accept="image/*"
-                                />
-                                <label className="textoModal"></label> 
-                            <p 
-                                className="text-danger m-0" >
-                                Este campo es obligatorio
-                            </p>
-                        </div>  
-                        <img className="imagenEdicion mb-1" src=""/>               
+                                {...register("image", { required: true })}
+                                /> 
+                                {errors.image?.type == 'required' && <p className="text-danger mb-0">Debe subir una imagen</p>} 
+                                <img className="imagenEdicion mb-1" src=""/>                            
+                        </div> 
                     </div>           
-                    <div className="d-flex justify-content-center gap-5">
-                            <button id="submitBtn" type="submit" className="btn btn-primary">Enviar</button>
-                            <button id="resetBtn" type="button" className="btn btn-danger">Resetear Formulario</button>
+                    <div className="d-flex justify-content-center gap-5 mt-3">
+                            <button id="submitBtn" type="submit" className="btn btn-primary btn-lg ">Enviar</button>
+                            <button id="resetBtn" type="button" className="btn btn-danger btn-lg" onClick={()=> reset()}>Resetear Formulario</button>
                     </div>
                 </form>
             </div>

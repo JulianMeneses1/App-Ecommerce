@@ -1,6 +1,10 @@
 import { NavLink } from "react-router-dom"
+import { useAuth } from "../../auth/hooks/useAuth"
 
 export const Navbar = () => {
+
+    const { login, handlerLogout } = useAuth();
+
     return (
         <nav className="navbar navbar-expand-lg">
             <div className="container-fluid">
@@ -19,29 +23,33 @@ export const Navbar = () => {
                                     Categorías
                                 </a>
                                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><NavLink className="nav-link" to="/notebooks">Notebooks</NavLink></li>
-                                    <li><NavLink className="nav-link" to="/pcs">PCs de Escritorio</NavLink></li>
-                                    <li><NavLink className="nav-link" to="/monitores">Monitores</NavLink></li>
-                                    <li><NavLink className="nav-link" to="/placas-de-video">Placas de Video</NavLink></li>
-                                    <li><NavLink className="nav-link" to="/microprocesadores">Microprocesadores</NavLink></li>                          
+                                    <li><NavLink className="nav-link" to="categoría/notebooks">Notebooks</NavLink></li>
+                                    <li><NavLink className="nav-link" to="categoría/pcs">PCs de Escritorio</NavLink></li>
+                                    <li><NavLink className="nav-link" to="categoría/monitores">Monitores</NavLink></li>
+                                    <li><NavLink className="nav-link" to="categoría/placas-de-video">Placas de Video</NavLink></li>
+                                    <li><NavLink className="nav-link" to="categoría/microprocesadores">Microprocesadores</NavLink></li>                          
                                 </ul>
                             </li>
-                            <li className="nav-item">
-                                <NavLink className="nav-link item fs-5" to="/crear-producto">Crear Producto</NavLink>
-                            </li>
+                           { login.isAdmin &&
+                                <li className="nav-item">
+                                    <NavLink className="nav-link item fs-5" to="/crear-producto">Crear Producto</NavLink>
+                                </li>
+                            }
                                            
                         </ul>
                     </div>                    
                 </div> 
                 <div className="d-flex align-items-baseline">
                     <ul className="navbar-nav">
-                        <li className="nav-item">
+                        { !login.isAuth && 
+                            <li className="nav-item">
                                 <NavLink className="nav-link" to="/login">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="gray" className="bi bi-person-fill" viewBox="0 0 16 16">
                                         <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
                                     </svg>
                                 </NavLink>
-                        </li>                            
+                            </li>  
+                        }                          
                         <li className="nav-item">
                                 <NavLink className="nav-link" to="/carrito-compras">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="gray" className="bi bi-cart-fill" viewBox="0 0 16 16">
@@ -50,13 +58,18 @@ export const Navbar = () => {
                                 </NavLink>
                         </li>       
                     </ul>
-                    <span className="nav-link mx-3 fs-5">
-                        admin
-                    </span>
-                    <button
-                        className="btn btn-danger fs-5">
-                        Logout
-                    </button>
+                    { login.isAuth &&
+                        <>
+                            <span className="nav-link mx-3 fs-5">
+                                Bienvenido/a {login.user.username}
+                            </span>
+                            <button
+                                className="btn btn-danger fs-5"
+                                onClick={() => handlerLogout()}>
+                                Logout
+                            </button>
+                        </> 
+                    }
                 </div>            
             </div>
         </nav>    
