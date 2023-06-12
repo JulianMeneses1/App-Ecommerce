@@ -23,7 +23,7 @@ export const ProductsByCategory = () => {
                 </div>
                     <div className="d-flex gap-4 mb-3 flex-wrap justify-content-center">
                         <div className={`card ${styles.cardModule}`}>
-                               
+                        <NavLink className="nav-link" to={"/producto/1"}> 
                                     <img src="http://localhost:8080/files/notebook.jpg" className="card-img-top"/>
                              
                                 <div className="card-body">
@@ -32,6 +32,7 @@ export const ProductsByCategory = () => {
                                     <p className="card-text">{page}</p>
                                     
                                 </div>
+                                </NavLink>
                             </div>
                             <div className={`card ${styles.cardModule}`}>
                                

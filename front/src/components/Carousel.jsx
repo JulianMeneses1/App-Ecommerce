@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import styles from './carousel.module.css'
 
-export const Carousel = ({ categoria }) => {
+export const Carousel = ({ category }) => {
     return (
         <>
             <div className="container-fluid my-4">                
@@ -13,32 +13,32 @@ export const Carousel = ({ categoria }) => {
                         <div className="carousel-item active" data-bs-interval="5000">
                             <div className="cards-wrapper d-flex gap-3">
                                 <div className={`card ${styles.cardModule}`}>                                    
-                                        <NavLink className="nav-link" to={"/asd"}>
+                                        <NavLink className="nav-link" to={"/producto/1"}>
                                             <img src="http://localhost:8080/files/notebook.jpg" className="card-img-top"/>                                                                 
                                             <div className="card-body">                                     
                                                 <h4 className="card-title">$ 300000</h4>
-                                                <p className="card-text">{categoria}</p>
+                                                <p className="card-text">{category}</p>
                                             </div>
                                         </NavLink>                                        
                                     
                                 </div>
                                 <div className={`card ${styles.cardModule}`}>
                                     
-                                    <NavLink className="nav-link" to={"/asd"}>
+                                    <NavLink className="nav-link" to={"/producto/1"}>
                                             <img src="http://localhost:8080/files/notebook.jpg" className="card-img-top"/>                                                                 
                                             <div className="card-body">                                     
                                                 <h4 className="card-title">$ 300000</h4>
-                                                <p className="card-text">{categoria}</p>
+                                                <p className="card-text">{category}</p>
                                             </div>
                                         </NavLink> 
                                 </div>
                                 <div className={`card ${styles.cardModule}`}>
                                     
-                                    <NavLink className="nav-link" to={"/asd"}>
+                                    <NavLink className="nav-link" to={"/producto/1"}>
                                             <img src="http://localhost:8080/files/notebook.jpg" className="card-img-top"/>                                                                 
                                             <div className="card-body">                                     
                                                 <h4 className="card-title">$ 300000</h4>
-                                                <p className="card-text">{categoria}</p>
+                                                <p className="card-text">{category}</p>
                                             </div>
                                         </NavLink> 
                                 </div>
@@ -54,7 +54,7 @@ export const Carousel = ({ categoria }) => {
                                       
                                     <div className="card-body">
                                         <h4 className="card-title">$ 300004</h4>
-                                        <p className="card-text">{categoria}</p>
+                                        <p className="card-text">{category}</p>
                                         
                                     </div>
                                 </div>
@@ -64,7 +64,7 @@ export const Carousel = ({ categoria }) => {
                                      
                                     <div className="card-body">
                                         <h4 className="card-title">$ 300005</h4>
-                                        <p className="card-text">{categoria}</p>
+                                        <p className="card-text">{category}</p>
                                         
                                     </div>
                                 </div>
@@ -74,7 +74,7 @@ export const Carousel = ({ categoria }) => {
                                    
                                     <div className="card-body">
                                         <h4 className="card-title">$ 300006</h4>
-                                        <p className="card-text">{categoria}</p>
+                                        <p className="card-text">{category}</p>
                                         
                                     </div>
                                 </div>
@@ -103,7 +103,7 @@ export const Carousel = ({ categoria }) => {
                              
                                 <div className="card-body">
                                     <h4 className="card-title">$ 300000</h4>
-                                    <p className="card-text">{categoria}</p>
+                                    <p className="card-text">{category}</p>
                                     
                                 </div>
                             </div>
@@ -113,7 +113,7 @@ export const Carousel = ({ categoria }) => {
                               
                                 <div className="card-body">
                                     <h4 className="card-title">$ 300001</h4>
-                                    <p className="card-text">{categoria}</p>
+                                    <p className="card-text">{category}</p>
                                 </div>
                             </div>
                     </div>
@@ -125,7 +125,7 @@ export const Carousel = ({ categoria }) => {
                        
                             <div className="card-body">
                                 <h4 className="card-title">$ 300003</h4>
-                                <p className="card-text">{categoria}</p>
+                                <p className="card-text">{category}</p>
                             </div>
                         </div>
                         <div className="card {styles.cardModule}">
@@ -134,7 +134,7 @@ export const Carousel = ({ categoria }) => {
                       
                             <div className="card-body">
                                 <h4 className="card-title">$ 300004</h4>
-                                <p className="card-text">{categoria}</p>
+                                <p className="card-text">{category}</p>
                             </div>
                         </div>
                     </div>       
