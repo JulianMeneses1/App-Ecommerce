@@ -1,3 +1,8 @@
 .navLink:hover {
     color: blue
 }
+
+.banner {
+    width: 60em;
+    height: 20em;
+}

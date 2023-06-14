@@ -5,7 +5,7 @@ import { Footer } from "../components/shared/Footer"
 import { ProductsByCategory } from "../pages/ProductsByCategory"
 import { LoginRegister } from "../auth/pages/LoginRegister"
 import { NewProduct } from "../pages/NewProduct"
-import { Cart } from "../pages/Cart"
+import { Cart } from "../cart/Cart"
 import { ProductDetails } from "../pages/ProductDetails"
 import { useSelector } from "react-redux"
 
