@@ -9,9 +9,9 @@ export const findAll = async () => {
     }  
 }
 
-export const findByCategoryPages = async (page = 0, size = 3) => {
+export const findByCategoryPages = async (category, page = 0, size = 6) => {
     try {
-        return await axios.get(`${import.meta.env.VITE_API_BASE_URL}/products/category/${monitores}?page=${page}&size=${size}`);
+        return await axios.get(`${import.meta.env.VITE_API_BASE_URL}/products/category/${category}?page=${page}&size=${size}`);
     } catch (error) {
         throw error;
     }  

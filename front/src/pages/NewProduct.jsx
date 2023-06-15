@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 
 export const NewProduct = () => {
 
-    const { register, handleSubmit, getValues, watch, formState: { errors }, clearErrors, reset } = useForm();
+    const { register, handleSubmit, watch, formState: { errors }, clearErrors, reset } = useForm();
 
     const watchAllFields = watch(); 
 
@@ -81,7 +81,11 @@ export const NewProduct = () => {
                                 /> 
                                 {errors.image?.type == 'required' && <p className="text-danger mb-0">Debe subir una imagen</p>} 
                                 <img className="imagenEdicion mb-1" src=""/>                            
-                        </div> 
+                        </div>
+                        <input 
+                            className="d-none" 
+                            value="0"
+                            {...register("id")}/> 
                     </div>           
                     <div className="d-flex justify-content-center gap-5 mt-3">
                             <button id="submitBtn" type="submit" className="btn btn-primary btn-lg ">Enviar</button>

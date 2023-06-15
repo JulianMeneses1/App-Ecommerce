@@ -1,38 +1,97 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const initialProducts = JSON.parse(sessionStorage.getItem('products')) || []
+export const initialErrors = {
+    title: ''
+}
 
-export const authSlice = createSlice({
-    name: 'auth',
+export const initialProducts = [
+    {notebooks: []},
+    {monitores: []},
+    {pcs: []},
+    {placasDeVideo: []},
+    {microprocesadores: []}
+]
+
+export const productsSlice = createSlice({
+    name: 'products',
     initialState: {
-        initialLogin,
-        isSignIn: true
+        products: initialProducts,      
+        errors: initialErrors,  
+        isLoading: true,
+        paginator: {}
     },
     reducers: {
-        onToggleSignIn: (state) => {
-            state.isSignIn = !state.isSignIn
+        addProduct: (state, {payload: {category, product}}) => {
+
+            const updatedState = state.products.map((categoryObj) => {
+                if (Object.keys(categoryObj)[0] === category) {
+                    return {
+                       [category]: [...categoryObj[category], { ...product }]
+                    }               
+                }
+                return categoryObj;
+            });
+            state.products = updatedState;
         },
-        onLogin: (state, action) => {
-            state.isAuth = true,
-            state.isAdmin = action.payload.isAdmin,
-            state.user = action.payload.user,
-            state.isLoginLoading = false;
+        removeProduct: (state, {payload: {category, id}}) => {
+
+            const updatedState = state.products.map((categoryObj) => {
+                if (Object.keys(categoryObj)[0] === category) {
+                    const updatedCategory = categoryObj[category].filter(
+                    (product) => product.id !== id
+                    );
+                    return {
+                    [category]: updatedCategory,
+                    };
+                }
+                return categoryObj;
+                });              
+                state.products = updatedState;
         },
-        onLogout: (state) => {
-            state.isAuth = false,
-            state.isAdmin = false,
-            state.user = undefined,
-            state.isLoginLoading = false;
+        updateProduct:  (state, {payload: {category, product }}) => {
+
+            const updatedState = state.products.map(categoryObj => {
+                if (Object.keys(categoryObj)[0] === category) {
+                    const updatedCategory = categoryObj[category].map (existingProduct => {
+                        if(existingProduct.id === product.id) {
+                            return { ...product }
+                        }
+                        return existingProduct;
+                    });
+                    return {
+                        [category]: updatedCategory
+                    };
+                }
+                return categoryObj;
+            });
+
+            state.products = updatedState;
+        },     
+        loadingProductsByCategory: (state, {payload: {category, data}}) => {
+            state.paginator = data;
+            state.isLoading = false;          
+
+            const updatedState = state.products.map(categoryObj => {
+                if (categoryObj && Object.keys(categoryObj)[0] === category) {                
+                    return {
+                        [category]: data.content
+                    };
+                }
+                return categoryObj;
+            });
+            state.products = updatedState;         
         },
-        onInitLogin: (state) => {
-            state.isLoginLoading = true;
-        }
+        setErrors: (state, action) => {
+            state.errors = action.payload;
+        }      
     }
 });
 
 export const {
-    onLogin,
-    onLogout,
-    onInitLogin,
-    onToggleSignIn
-} = authSlice.actions
+    addProduct,
+    removeProduct,
+    updateProduct,
+    loadingProductsByCategory,
+    isLoading,
+    setErrors
+} = productsSlice.actions

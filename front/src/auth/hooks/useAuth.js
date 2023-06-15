@@ -45,6 +45,7 @@ export const useAuth = () => {
         dispatch(onLogout());
         sessionStorage.removeItem('login');
         sessionStorage.removeItem('token');
+        navigate('/');
     }
 
     return {
