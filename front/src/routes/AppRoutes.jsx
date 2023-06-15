@@ -22,7 +22,7 @@ export const AppRoutes = () => {
                 <Route path='/login' element={ <LoginRegister/> } />
                 { isAdmin && <Route path='/crear-producto' element={ <NewProduct/> } />}
                 <Route path='/carrito-compras' element={ <Cart/> } />
-                <Route path='/producto/:id' element={ <ProductDetails/> } />
+                <Route path='/producto/:category/:title/:id' element={ <ProductDetails/> } />
                 <Route path='/*' element= { <Navigate to='/'/> } />
             </Routes>
             <Footer/>

@@ -1,9 +1,10 @@
 import { NavLink } from "react-router-dom"
 import { useAuth } from "../../auth/hooks/useAuth"
+import { useEffect } from "react";
 
 export const Navbar = () => {
 
-    const { login, handlerLogout } = useAuth();
+    const { login, handlerLogout } = useAuth();  
 
     return (
         <nav className="navbar navbar-expand-lg">
@@ -23,11 +24,11 @@ export const Navbar = () => {
                                     Categorías
                                 </a>
                                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><NavLink className="nav-link" to="categoría/notebooks">Notebooks</NavLink></li>
-                                    <li><NavLink className="nav-link" to="categoría/pcs">PCs de Escritorio</NavLink></li>
-                                    <li><NavLink className="nav-link" to="categoría/monitores">Monitores</NavLink></li>
-                                    <li><NavLink className="nav-link" to="categoría/placas-de-video">Placas de Video</NavLink></li>
-                                    <li><NavLink className="nav-link" to="categoría/microprocesadores">Microprocesadores</NavLink></li>                          
+                                    <li><NavLink className="nav-link" to="categoría/notebooks?page=0">Notebooks</NavLink></li>
+                                    <li><NavLink className="nav-link" to="categoría/pcs?page=0">PCs de Escritorio</NavLink></li>
+                                    <li><NavLink className="nav-link" to="categoría/monitores?page=0">Monitores</NavLink></li>
+                                    <li><NavLink className="nav-link" to="categoría/placasDeVideo?page=0">Placas de Video</NavLink></li>
+                                    <li><NavLink className="nav-link" to="categoría/microprocesadores?page=0">Microprocesadores</NavLink></li>                          
                                 </ul>
                             </li>
                            { login.isAdmin &&

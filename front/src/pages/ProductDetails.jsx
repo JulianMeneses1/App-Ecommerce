@@ -1,11 +1,14 @@
 import { NavLink, useParams } from "react-router-dom";
 import styles from './productDetails.module.css'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux"
+import { useProducts } from "../hooks/useProducts";
 
 export const ProductDetails = () => {
 
     const {id} = useParams();
+
+    const { getProduct, getCategoryName, product, isLoadingProduct} = useProducts();
 
     const { isAdmin } = useSelector(state => state.auth);
 
@@ -19,9 +22,26 @@ export const ProductDetails = () => {
         if (counter > 1) {
             setCounter (counter -1)
             };
-    };
+    }; 
+
+    useEffect(()=>{
+       getProduct(id);
+    },[id])
+
+    let categoryName = getCategoryName(product?.category?.name);  
+
+    if (isLoadingProduct) {
+        return (
+            <div style={{height:"90vh"}} className="d-flex align-items-center justify-content-center">
+                <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        )
+    }
 
     return (
+        
         <>
             <div className="container my-4">
                 <div className="d-flex align-items-center mb-5">
@@ -30,8 +50,8 @@ export const ProductDetails = () => {
                                     <path fillRule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
                                 </svg>
                     </NavLink>
-                    <NavLink className="nav-link" to={"/"}>
-                        <h4 className="mb-1">Volver al Listado de Notebooks</h4>
+                    <NavLink className="nav-link" to={`/categoría/${product?.category?.name}?page=0`}>
+                        <h4 className="mb-1">Volver al Listado de {categoryName}</h4>
                     </NavLink>
                 </div>
                 <div>
@@ -39,7 +59,7 @@ export const ProductDetails = () => {
                     <div className={`d-flex ${styles.containerProduct}`}>
                         <div className="w-60" >
                             <div className="d-flex flex-wrap gap-3">
-                                <h5>Título Producto {id}</h5>                                
+                                <h5> {product?.title}</h5>                                
                                { isAdmin && 
                                     <div>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="blue" className={`me-2 bi bi-pencil-square ${styles.buttonsEdition}`} viewBox="0 0 16 16">
@@ -54,17 +74,14 @@ export const ProductDetails = () => {
                                 }
                             </div>
                          
-                            <img className="w-75" src="http://localhost:8080/files/notebook.jpg"/>
+                            <img className="w-75" src={product?.image}/>
                             <div>
                                 <h4>Descripción</h4>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                    Expedita adipisci quas hic aliquam? Quis, 
-                                    sequi et. Ullam alias commodi neque corrupti t
-                                    empore blanditiis nihil ipsa, quibusdam amet sed doloremque qui.</p>
+                                <p>{product?.description}</p>
                             </div>
                         </div>
                         <div className={`w-40 ${styles.containerPayment}`}>
-                            <h2>$300000</h2>
+                            <h2>{`$${product?.price}`}</h2>
                             <p className="text-secondary">Válido para 1 pago en efectivo, débito o transferencia bancaria</p>
                             <div className={`separator ${styles.separator}`}></div>
                             <div className="d-flex gap-2">

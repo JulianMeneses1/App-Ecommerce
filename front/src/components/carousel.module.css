@@ -1,6 +1,6 @@
 .cardModule {
     width: calc(100%/3);
-    height: 50%;
+    height: 30rem;
 }
 
 .carouselControlPrev{
@@ -30,6 +30,7 @@
 @media screen and (max-width: 600px) {
     .cardModule {
         width: calc(100%/2);
+        height: auto;
     }
 }
 

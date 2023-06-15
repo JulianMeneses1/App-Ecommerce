@@ -10,7 +10,7 @@ export const useAuth = () => {
 
     const navigate = useNavigate();
 
-    const {user, isAdmin, isAuth } = useSelector(state => state.auth);
+    const {login } = useSelector(state => state.auth);
 
     const handlerLogin = async ({email, password}) => {        
         try {
@@ -51,10 +51,6 @@ export const useAuth = () => {
     return {
         handlerLogin,
         handlerLogout,
-        login: {
-            user,
-            isAdmin,
-            isAuth
-        }
+        login
     }
 }

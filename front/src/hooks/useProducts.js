@@ -1,21 +1,58 @@
 import { useDispatch, useSelector } from "react-redux"
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import { findByCategoryPages, remove, save, update } from "../services/productsService";
-import { addProduct, loadingProductsByCategory, removeProduct, setErrors, updateProduct } from "../store/slices/products/productsSlice";
+import { findByCategoryPages, findById, remove, save, update } from "../services/productsService";
+import { addProduct, loadingProduct, loadingProductsCategories, loadingProductsHome, removeProduct, setErrors, updateProduct } from "../store/slices/products/productsSlice";
 import { useAuth } from "../auth/hooks/useAuth";
 
 export const useProducts = () => {
     
-    const { products, isLoading, paginator, errors} = useSelector(state => state.products);
+    const { productsHome, product, productsCategories, isLoadingHome, isLoadingCategories, isLoadingProduct, paginator, errors} = useSelector(state => state.products);
     const { handlerLogout } = useAuth;
     const dispatch = useDispatch();
-    const navigate = useNavigate();    
+    const navigate = useNavigate();  
+    
+    const getCategoryName = (category) => { 
+        let categoryName = '';
 
-    const getProductsByCategory = async (category, page = 0, size = 6 ) => {
+        switch (category) {
+            case "notebooks":
+                return categoryName = "Notebooks";
+            case "monitores":
+                return categoryName = "Monitores";
+            case "pcs":
+                return categoryName = "PCs de Escritorio";
+            case "placasDeVideo":
+                return categoryName = "Placas de Video";
+            case "microprocesadores":
+                return categoryName = "Microprocesadores";
+            default:
+                return categoryName = "Categoría no encontrada";
+        }
+    }
+
+    const getProductsHome = async (category, page = 0, size = 6 ) => {
         try {
             const result = await findByCategoryPages(category, page, size );
-            dispatch(loadingProductsByCategory({ data: result.data, category }));
+            dispatch(loadingProductsHome({ data: result.data, category, page: "Home" }));
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    const getProductsCategories = async (category, page = 0, size = 6 ) => {
+        try {
+            const result = await findByCategoryPages(category, page, size );
+            dispatch(loadingProductsCategories({ data: result.data, category, page: "Categories" }));
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    const getProduct = async (id) => {
+        try {
+            const result = await findById(id);
+            dispatch(loadingProduct(result.data));
         } catch (error) {
             throw error;
         }
@@ -95,14 +132,20 @@ export const useProducts = () => {
           })     
     }
 
-    
     return {
-        products,
+        productsHome,
+        productsCategories,
+        product,
         errors,
-        isLoading,
+        isLoadingHome, 
+        isLoadingCategories, 
+        isLoadingProduct,
         paginator,
         handlerAddOrUpdateProduct,
         handlerRemoveProduct,
-        getProductsByCategory
+        getProductsHome,
+        getProductsCategories,
+        getProduct,
+        getCategoryName
     }
 }

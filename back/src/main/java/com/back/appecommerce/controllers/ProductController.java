@@ -65,7 +65,7 @@ public class ProductController {
         
     }
     
-    @GetMapping("/nombre/{title}")
+    @GetMapping("/title/{title}")
     public ResponseEntity<?> getProductByTitle(@PathVariable String title) {
         Optional <Product> productOptional = productService.findByTitle(title);
         if (productOptional.isPresent()) {

@@ -7,10 +7,11 @@ export const initialLogin = JSON.parse(sessionStorage.getItem('login')) || {
     isLoginLoading: false
 }
 
+
 export const authSlice = createSlice({
     name: 'auth',
     initialState: {
-        initialLogin,
+        login: initialLogin,
         isSignIn: true
     },
     reducers: {
