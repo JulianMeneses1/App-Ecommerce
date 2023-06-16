@@ -1,6 +1,6 @@
 import { NavLink, useLocation, useParams } from "react-router-dom"
 import queryString from 'query-string';
-import styles from './productsByCategory.module.css'
+import styles from '../../styles/ProductsByCategory.module.css'
 import { useProducts } from "../hooks/useProducts";
 import { useEffect } from "react";
 import { Paginator } from "../components/Paginator";

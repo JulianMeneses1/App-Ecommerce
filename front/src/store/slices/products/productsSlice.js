@@ -27,29 +27,41 @@ export const productsSlice = createSlice({
     reducers: {
         addProduct: (state, {payload: {category, product}}) => {
 
-            state.products[category] = [
-                ...state.products[category], 
-                {
-                    ...product
-                } 
-            ]          
+            const addProductByPage = (page) => {
+                state[page][category] = [
+                    ...state[page][category], 
+                    {
+                        ...product
+                    } 
+                ];
+            };            
+            addProductByPage(productsHome);
+            addProductByPage(productsCategories);          
         },
         removeProduct: (state, {payload: {category, id}}) => {
 
-            state.products[category] = state.products[category].filter(
+            const removeProductByPage = (page) => {
+                state[page][category] = state[page][category].filter(
                 (product) => product.id !== id
               );
+            }
+            removeProductByPage(productsHome);
+            removeProductByPage(productsCategories);
         },
         updateProduct:  (state, {payload: {category, product }}) => {
 
-            state.products[category] = state.products[category].map( existingProduct => { 
-                if (existingProduct.id !== product.id) {
-                    return {
-                        ...product
-                    }                    
-                };
-                return existingProduct;
-            })
+            const updateProductByPage = (page) => {
+                state[page][category] = state[page][category].map( existingProduct => { 
+                    if (existingProduct.id !== product.id) {
+                        return {
+                            ...product
+                        }                    
+                    };
+                    return existingProduct;
+                })
+            }
+            updateProductByPage(productsHome);
+            updateProductByPage(productsCategories)            
         },     
         loadingProductsHome: (state, {payload: {category, data, page}}) => {
             state.paginator = data;

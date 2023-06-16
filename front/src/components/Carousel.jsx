@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import styles from './carousel.module.css'
+import styles from '../styles/Carousel.module.css'
 
 export const Carousel = ({ products, category }) => {    
 

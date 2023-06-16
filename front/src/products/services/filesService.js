@@ -1,4 +1,4 @@
-import filesApi from "../apis/filesApi";
+import filesApi from "../../apis/filesApi";
 import axios from "axios";
 
 export const getFile = async (fileName) => {

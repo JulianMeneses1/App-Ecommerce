@@ -1,4 +1,4 @@
-import productsApi from "../apis/productsApi";
+import productsApi from "../../apis/productsApi";
 import axios from "axios";
 
 export const findAll = async () => {

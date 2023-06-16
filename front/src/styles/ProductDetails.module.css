@@ -25,7 +25,7 @@
 
 .containerCounter{
     border-radius: 5%;
-    width: 50%;
+    min-width: 50%;
 }
 
 .counter {    

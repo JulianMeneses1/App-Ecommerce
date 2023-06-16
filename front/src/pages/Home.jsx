@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom"
 import { Carousel } from "../components/Carousel"
-import styles from './home.module.css'
+import styles from '../styles/Home.module.css'
 import { useEffect } from "react"
-import { useProducts } from "../hooks/useProducts"
+import { useProducts } from "../products/hooks/useProducts"
 import { initialProducts } from "../store/slices/products/productsSlice"
 
 export const Home = () => {

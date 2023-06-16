@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom"
-import { useAuth } from "../../auth/hooks/useAuth"
-import { useEffect } from "react";
+import { useAuth } from "../auth/hooks/useAuth"
 
 export const Navbar = () => {
 

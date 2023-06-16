@@ -19,16 +19,16 @@ export const authSlice = createSlice({
             state.isSignIn = !state.isSignIn
         },
         onLogin: (state, action) => {
-            state.isAuth = true,
-            state.isAdmin = action.payload.isAdmin,
-            state.user = action.payload.user,
-            state.isLoginLoading = false;
+            state.login.isAuth = true,
+            state.login.isAdmin = action.payload.isAdmin,
+            state.login.user = action.payload.user,
+            state.login.isLoginLoading = false;
         },
         onLogout: (state) => {
-            state.isAuth = false,
-            state.isAdmin = false,
-            state.user = undefined,
-            state.isLoginLoading = false;
+            state.login.isAuth = false,
+            state.login.isAdmin = false,
+            state.login.user = undefined,
+            state.login.isLoginLoading = false;
         },
         onInitLogin: (state) => {
             state.isLoginLoading = true;
