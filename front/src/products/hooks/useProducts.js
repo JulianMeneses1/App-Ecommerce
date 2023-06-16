@@ -88,7 +88,8 @@ export const useProducts = () => {
                     'Lo sentimos, parece que su sesión ha expirado, debe volver a iniciar sesión',
                     'warning'
                 )  
-                handlerLogout();  
+                handlerLogout();
+                navigate("/");  
             }
             else {
                 throw error;
@@ -123,6 +124,7 @@ export const useProducts = () => {
                             'warning'
                         )    
                         handlerLogout();
+                        navigate("/");  
                    }
                    else {
                     throw error;

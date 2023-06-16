@@ -1,17 +1,20 @@
 import { useForm } from "react-hook-form";
+import { useFiles } from "../hooks/useFiles";
 
 export const NewProduct = () => {
 
-    const { register, handleSubmit, watch, formState: { errors }, clearErrors, reset } = useForm();
+    const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
 
     const watchAllFields = watch(); 
 
-    const onSubmit = data => console.log(data);
+    const { uploadFile, resetImg, errorSize, urlUploadedFile } = useFiles();
+
+    const onSubmit = data => { console.log(data) };
 
     return (
         <>
             <div className="formEvent container my-4 d-flex align-items-center">
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(onSubmit)}>                    
                     <h2>Crear Producto</h2>
                     <div className="row">
                         <div className="col-xxl-4 col-lg-6 col-md-12 my-1">
@@ -32,7 +35,6 @@ export const NewProduct = () => {
                             <textarea                      
                                 type="text"                       
                                 maxLength="200"
-                                onClick={() => clearErrors("description")}
                                 id="description"
                                 placeholder="Descripción del producto"
                                 {...register("description", { required: true, minLength: 20})}
@@ -57,9 +59,9 @@ export const NewProduct = () => {
                         <div className="col-xxl-4 col-lg-6 col-md-12 my-1">
                             <label htmlFor="category" className="form-label">Categoría</label>
                             <select 
-                                className="form-select" 
+                                className={`form-select ${watchAllFields?.category  && 'is-valid'} ${errors.category && 'is-invalid'}`}
                                 id="category"
-                                {...register("category", {required:true})}                         
+                                {...register("category", {required:true})}
                             >
                                 <option value="">Seleccione una categoría</option>
                                 <option value="1">Notebook</option>
@@ -70,17 +72,22 @@ export const NewProduct = () => {
                             </select>
                             {errors.category?.type == 'required' && <p className="text-danger mb-0">Debe elegir una categoría</p>}
                         </div>            
-                        <div className="col-xxl-4 col-lg-6 col-md-12 my-1">
+                        <div className=" col-lg-8 col-md-12 my-1">
                             <label htmlFor="image" className="form-label">Imagen</label>
-                            <input                       
-                                className="form-control"    
-                                type="file"                       
-                                id="image"
-                                accept="image/*"
-                                {...register("image", { required: true })}
+                            <div className="d-flex gap-3 containerImg">
+                                <input                       
+                                    className="form-control h-25 w-50"    
+                                    type="file"                       
+                                    id="image"
+                                    accept="image/*"
+                                    {...register("image", {required: true})}
+                                    onChange= {uploadFile}
+                                    
                                 /> 
-                                {errors.image?.type == 'required' && <p className="text-danger mb-0">Debe subir una imagen</p>} 
-                                <img className="imagenEdicion mb-1" src=""/>                            
+                                {urlUploadedFile != "" && <img className="imagenEdicion mb-1" src={urlUploadedFile}/> }
+                            </div> 
+                            {errors.image?.type == 'required' && <p className="text-danger mb-0">Debe subir una imagen</p>} 
+                            {errorSize && <p className="text-danger mb-0">La imagen no puede pesar más de 3 mb</p>}
                         </div>
                         <input 
                             className="d-none" 
@@ -89,7 +96,7 @@ export const NewProduct = () => {
                     </div>           
                     <div className="d-flex justify-content-center gap-5 mt-3">
                             <button id="submitBtn" type="submit" className="btn btn-primary btn-lg ">Enviar</button>
-                            <button id="resetBtn" type="button" className="btn btn-danger btn-lg" onClick={()=> reset()}>Resetear Formulario</button>
+                            <button id="resetBtn" type="button" className="btn btn-danger btn-lg" onClick={()=> {reset(); resetImg()}}>Resetear Formulario</button>
                     </div>
                 </form>
             </div>

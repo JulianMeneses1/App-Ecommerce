@@ -51,6 +51,22 @@ nav svg:hover {
     margin-bottom: 20px;
 }
 
+.formEvent img {
+    height: 8em;
+}
+
+
+
+@media screen and (max-width: 800px ) {
+    
+    .formEvent .containerImg{
+        flex-wrap: wrap;
+    }
+    .formEvent .containerImg input{
+        width: 100% !important
+    }
+}
+
 /* Formulario Login/Register */
 
 .formLogin {

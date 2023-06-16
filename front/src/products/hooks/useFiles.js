@@ -1,31 +1,61 @@
+import { useState } from "react";
+import { save } from "../services/filesService";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../auth/hooks/useAuth";
+
 export const useFiles = () => {
 
-    // const uploadFile = () => {
+    const [ errorSize, setErrorSize] = useState(false);
 
-    //     const formData = new FormData();
-    //     formData.append('file',this.archivoCapturado)
-    //     this.servicioArchivo.subirArchivo(formularioDeDatos)
-    //       .subscribe(response => {
-    //         this.archivoSubidoUrl = response.url;
-    //         this.formularioConocimientos.get('imagen')?.setValue(this.archivoSubidoUrl);
-    //       }) 
-    // }
+    const [ urlUploadedFile, setUrlUploadedFile] = useState('');
+
+    const navigate = useNavigate();
+
+    const {handlerLogout} = useAuth();
     
-    // const captureImage = (event) => {
-    //     let archivoCapturado = event.target.files[0]
-    //     if(archivoCapturado.size > 3000000) {     
-    //       let errorImage=true;         
-    //     } else {
-    //       let fileName=event.target.files[0].name
-    //       this.extraerURL(this.archivoCapturado).then((imagen:any) => {
-    //         this.previsualizacionImagen=imagen.base;      
-    //       })
-    //       this.subirArchivo();
-    //     }   
-    //   }
-    
-    // return {
-    //     uploadFile
-    // } 
+    const uploadFile = async (event) => {
+        const file = event.target.files[0];   
+        if (file) {
+          if (file.size > 3000000) {
+            setErrorSize(true);
+            setUrlUploadedFile('');
+            return false;
+          }      
+          try {
+                setTimeout(5000)
+                const formData = new FormData();
+                formData.append('file', file);
+                const result = await save(formData);
+                setUrlUploadedFile(result.data.url);
+                setErrorSize(false);
+                return true;
+            } catch (error) {
+                if (error.response?.status == 401) {
+                    Swal.fire(
+                        'Sesión Inválida',
+                        'Lo sentimos, parece que su sesión ha expirado, debe volver a iniciar sesión',
+                        'warning'
+                    )    
+                    handlerLogout();
+                    navigate("/");  
+               } else {
+                throw error;
+               }
+            }                  
+        }
+    }
+
+    const resetImg = () => {
+        setErrorSize(false);
+        setUrlUploadedFile('');
+    }
+
+    return {
+        uploadFile,
+        resetImg,
+        errorSize,
+        urlUploadedFile,
+    } 
 }
 
