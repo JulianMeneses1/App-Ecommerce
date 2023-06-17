@@ -8,7 +8,7 @@ import { useAuth } from "../../auth/hooks/useAuth";
 export const useProducts = () => {
     
     const { productsHome, product, productsCategories, isLoadingHome, isLoadingCategories, isLoadingProduct, paginator, errors} = useSelector(state => state.products);
-    const { handlerLogout } = useAuth;
+    const { handlerLogout } = useAuth();
     const dispatch = useDispatch();
     const navigate = useNavigate();  
     
@@ -76,7 +76,7 @@ export const useProducts = () => {
             };
             dispatch(setErrors({}))                      
             Swal.fire(                
-                (product.id== 0) ? 'Producto Creado' : 'Usuario Actualizado',
+                (product.id== 0) ? 'Producto Creado' : 'Producto Actualizado',
                 (product.id== 0) ? 'El producto '+ product.title +' ha sido creado exitosamente' :
                 'El producto '+ product.title +' ha sido actualizado exitosamente',
                 'success'
@@ -92,7 +92,7 @@ export const useProducts = () => {
                     'error'
                 )              
             }
-            else if (error.response?.states == 401) {
+            else if (error.response?.status == 401) {
                 Swal.fire(
                     'Sesión Inválida',
                     'Lo sentimos, parece que su sesión ha expirado, debe volver a iniciar sesión',
@@ -120,13 +120,13 @@ export const useProducts = () => {
             if (result.isConfirmed) {
                 try {
                     await remove(id);
-                    dispatch (removeProduct({category, id }));
-                    navigate("/");
+                    dispatch (removeProduct({category, id }));                    
                     Swal.fire(
                         'Eliminado',
-                        'El usuario ha sido eliminado con éxito',
+                        'El producto ha sido eliminado con éxito',
                         'success'
-                    );                        
+                    );
+                    navigate("/");                        
                 } catch (error) {                       
                     if (error.response?.status == 401) {
                         Swal.fire(

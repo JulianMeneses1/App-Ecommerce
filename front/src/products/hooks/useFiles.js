@@ -8,7 +8,7 @@ export const useFiles = () => {
 
     const [ errorSize, setErrorSize] = useState(false);
 
-    const [ urlUploadedFile, setUrlUploadedFile] = useState();
+    const [ urlUploadedFile, setUrlUploadedFile] = useState('');
 
     const navigate = useNavigate();
 

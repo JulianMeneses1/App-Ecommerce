@@ -35,7 +35,7 @@ export const NewProduct = () => {
     };
     return (
         <>
-            <div className="formEvent container my-4 d-flex align-items-center">
+            <div className="formCreateProduct container my-4 d-flex align-items-center">
                 <form onSubmit={handleSubmit(onSubmit)}>                    
                     <h2>Crear Producto</h2>
                     <div className="row">
@@ -56,7 +56,7 @@ export const NewProduct = () => {
                             <label htmlFor="description" className="form-label">Descripción</label>
                             <textarea                      
                                 type="text"                       
-                                maxLength="200"
+                                maxLength="300"
                                 id="description"
                                 placeholder="Descripción del producto"
                                 {...register("description", { required: true, minLength: 20})}
@@ -105,7 +105,7 @@ export const NewProduct = () => {
                                     {...register("image", {required: true})}
                                     onChange= {uploadFile}
                                 /> 
-                                {urlUploadedFile && <img className="imagenEdicion mb-1" src={urlUploadedFile}/> }
+                                {urlUploadedFile && <img src={urlUploadedFile}/> }
                             </div> 
                             {errors.image?.type == 'required' && <p className="text-danger mb-0">Debe subir una imagen</p>} 
                             {errorSize && <p className="text-danger mb-0">La imagen no puede pesar más de 3 mb</p>}

@@ -41,7 +41,7 @@ export const save = async ({title, description, image, price, category}) => {
 }
 export const update = async ({title, description, image, price, category, id}) => {
     try {
-        return await productsApi.put(`''/${id}`, {
+        return await productsApi.put(`/${id}`, {
             title,
             description,
             image,
@@ -55,7 +55,7 @@ export const update = async ({title, description, image, price, category, id}) =
 }
 export const remove = async (id) => {
     try {
-        await productsApi.delete(`''/${id}`);
+        await productsApi.delete(`/${id}`);
     } catch (error) {
         throw error;
     }   

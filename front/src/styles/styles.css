@@ -41,34 +41,34 @@ nav svg:hover {
     transform: scale(1.20);
 }
 
-/* Formulario Nuevo Producto */
+/* Formulario Crear Producto */
 
-.formEvent {
+.formCreateProduct {
     min-height: 70vh;
 }
-.formEvent form {
+.formCreateProduct form {
     width: 100%;
     padding: 40px;
     background: rgb(138, 133, 133);
     border-radius: 20px;
 }
 
-.formEvent form h2 {
+.formCreateProduct form h2 {
     font-size: 30px;
     text-align: center;
     margin-bottom: 20px;
 }
 
-.formEvent img {
+.formCreateProduct img {
     height: 8em;
 }
 
 @media screen and (max-width: 800px ) {
     
-    .formEvent .containerImg{
+    .formCreateProduct .containerImg, .formEditProduct .containerImg{
         flex-wrap: wrap;
     }
-    .formEvent .containerImg input{
+    .formCreateProduct .containerImg input, .formEditProduct .containerImg input{
         width: 100% !important
     }
 }

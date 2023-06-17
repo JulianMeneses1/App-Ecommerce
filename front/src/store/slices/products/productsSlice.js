@@ -26,8 +26,7 @@ export const productsSlice = createSlice({
     },
     reducers: {
         addProduct: (state, {payload: {category, product}}) => {
-            console.log(category, product)
-            
+           
             state.productsHome[category] = [
                 ...state.productsHome[category], 
                 {
@@ -44,13 +43,14 @@ export const productsSlice = createSlice({
         updateProduct:  (state, {payload: {category, product }}) => {
 
             state.productsHome[category] = state.productsHome[category].map( existingProduct => { 
-                if (existingProduct.id !== product.id) {
+                if (existingProduct.id == product.id) {
                     return {
                         ...product
                     }                    
                 };
                 return existingProduct;
-            })                      
+            }) 
+            state.product = product                     
         },     
         loadingProductsHome: (state, {payload: {category, data, page}}) => {
             state.paginator = data;
