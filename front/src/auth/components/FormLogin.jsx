@@ -1,13 +1,13 @@
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { onToggleSignIn } from "../../store/slices/auth/authSlice";
+import { isLoginLoading, onToggleSignIn } from "../../store/slices/auth/authSlice";
 import { useAuth } from "../hooks/useAuth";
 
 export const FormLogin = ({emailPattern}) => {
 
     const { register, reset, handleSubmit, watch, formState: { errors } } = useForm();
 
-    const { handlerLogin, isLoading } = useAuth();
+    const { handlerLogin, isLoginLoading } = useAuth();
 
     const watchAllFields = watch();  
 
@@ -60,14 +60,15 @@ export const FormLogin = ({emailPattern}) => {
                         </div>                         
                     </div>                            
                     <div className="d-flex justify-content-center mt-4">
-                            { isLoading 
-                            ? <button id="submitBtn" type="submit" className="w-50 btn btn-primary btn-lg ">
-                                    <div className="d-flex justify-content-between">
-                                        <p className="mb-0">Procesando</p>
-                                        <div className="spinner-border text-info me-1" role="status"></div>
-                                    </div>
-                                </button>
-                            : <button id="submitBtn" type="submit" className=" w-50 btn btn-primary btn-lg ">Iniciar Sesión</button>}
+                            { isLoginLoading 
+                                ? <button id="submitBtn" type="submit" className="w-50 btn btn-primary btn-lg ">
+                                        <div className="d-flex justify-content-between">
+                                            <p className="mb-0">Procesando</p>
+                                            <div className="spinner-border text-info me-1" role="status"></div>
+                                        </div>
+                                    </button>
+                                : <button id="submitBtn" type="submit" className=" w-50 btn btn-primary btn-lg ">Iniciar Sesión</button>
+                            }
                     </div>
                 </form>
             </div>

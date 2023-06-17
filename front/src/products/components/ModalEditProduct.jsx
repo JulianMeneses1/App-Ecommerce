@@ -13,7 +13,7 @@ export const ModalEditProduct = ({product}, props)=> {
 
   const { uploadFile, resetImg, errorSize, urlUploadedFile } = useFiles();
 
-  const { handlerAddOrUpdateProduct, errors: errorTitleUnique, cleanErrors } = useProducts();
+  const { handlerAddOrUpdateProduct, errors: errorTitleUnique, cleanErrors, isLoading } = useProducts();
 
   const resetForm = () => {
       reset(); 
@@ -119,7 +119,7 @@ export const ModalEditProduct = ({product}, props)=> {
                     <select 
                         className={`form-select ${watchAllFields?.category  && 'is-valid'} ${errors.category && 'is-invalid'}`}
                         id="category"
-                        defaultValue={product.category.id}
+                        defaultValue={product?.category?.id}
                         {...register("category", {required:true})}
                     >
                       <option value="1" data-name="notebooks">Notebook</option>
@@ -155,7 +155,15 @@ export const ModalEditProduct = ({product}, props)=> {
           </Modal.Body>
           <Modal.Footer style={{ justifyContent: 'space-around'}}>
             <button id="resetBtn" type="button" className="btn btn-secondary btn-lg" onClick={handleClose}>Cerrar</button>
-            <button id="submitBtn" type="submit" className="btn btn-primary btn-lg">Confirmar</button>
+            { isLoading 
+              ? <button id="submitBtn" type="submit" className="w-50 btn btn-primary btn-lg ">
+                      <div className="d-flex justify-content-between">
+                          <p className="mb-0">Procesando</p>
+                          <div className="spinner-border text-info me-1" role="status"></div>
+                      </div>
+                  </button>
+              : <button id="submitBtn" type="submit" className="btn btn-primary btn-lg">Confirmar</button>
+            }
           </Modal.Footer>
         </form>
       </Modal>

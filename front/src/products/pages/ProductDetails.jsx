@@ -10,7 +10,7 @@ export const ProductDetails = () => {
 
     const {id} = useParams();
 
-    const { getProduct, getCategoryName, product, isLoadingProduct, handlerRemoveProduct} = useProducts();
+    const { getProduct, getCategoryName, product, isLoading, handlerRemoveProduct} = useProducts();
 
     const { login } = useSelector(state => state.auth);
 
@@ -32,7 +32,7 @@ export const ProductDetails = () => {
 
     let categoryName = getCategoryName(product?.category?.name);  
 
-    if (isLoadingProduct) {
+    if (isLoading) {
         return (
             <div style={{height:"90vh"}} className="d-flex align-items-center justify-content-center">
                 <div className="spinner-border text-primary" role="status">

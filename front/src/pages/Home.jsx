@@ -9,7 +9,7 @@ export const Home = () => {
 
     const {
         productsHome,
-        isLoadingHome,
+        isLoading,
         getProductsHome
     } = useProducts();
 
@@ -23,7 +23,7 @@ export const Home = () => {
         }        
     }, [])
 
-    if (isLoadingHome) {
+    if (isLoading) {
         return (
             <div style={{height:"90vh"}} className="d-flex align-items-center justify-content-center">
                 <div className="spinner-border text-primary" role="status">

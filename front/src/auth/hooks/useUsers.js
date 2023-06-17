@@ -6,7 +6,7 @@ import { finishLoading, onCreateUser, onLoading, setErrors } from "../../store/s
 
 export const useUsers = () => {
     
-    const { isCreatingUserLoading, errors} = useSelector(state => state.auth);
+    const { isLoginLoading, errors} = useSelector(state => state.auth);
 
     const { handlerLogin}= useAuth();
     const dispatch = useDispatch(); 
@@ -40,6 +40,6 @@ export const useUsers = () => {
         handlerCreateUser,
         isLoginLoading,
         errors,
-        isCreatingUserLoading
+        isLoginLoading
     }
 }

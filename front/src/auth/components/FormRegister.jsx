@@ -9,7 +9,7 @@ export const FormRegister = ({emailPattern, passwordPattern}) => {
 
     const { register, handleSubmit, watch, getFieldState, formState: { errors } } = useForm();
 
-    const { handlerCreateUser, errors: errorEmailUnique, isCreatingUserLoading } = useUsers();
+    const { handlerCreateUser, errors: errorEmailUnique, isLoginLoading } = useUsers();
 
     const watchAllFields = watch();   
 
@@ -19,7 +19,7 @@ export const FormRegister = ({emailPattern, passwordPattern}) => {
         }
     };
 
-    if (isCreatingUserLoading) {
+    if (isLoginLoading) {
         return (
             <div style={{height:"90vh"}} className="d-flex align-items-center justify-content-center">
                 <div className="spinner-border text-primary" role="status">
@@ -111,7 +111,15 @@ export const FormRegister = ({emailPattern, passwordPattern}) => {
                         </div>                         
                     </div>           
                     <div className="d-flex justify-content-center gap-5 mt-4">
-                            <button id="submitBtn" type="submit" className=" w-50 btn btn-primary btn-lg ">Registrarse</button>
+                        { isLoginLoading 
+                            ? <button id="submitBtn" type="submit" className="w-50 btn btn-primary btn-lg ">
+                                    <div className="d-flex justify-content-between">
+                                        <p className="mb-0">Procesando</p>
+                                        <div className="spinner-border text-info me-1" role="status"></div>
+                                    </div>
+                                </button>
+                            : <button id="submitBtn" type="submit" className=" w-50 btn btn-primary btn-lg ">Registrarse</button>
+                        }
                     </div>
                 </form>
             </div>

@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux"
 import { loginUser } from "../services/authService"
-import { onLogin, onLogout, isLoginLoading } from "../../store/slices/auth/authSlice";
+import { onLogin, onLogout, onLoading } from "../../store/slices/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 
 export const useAuth = () => {
@@ -10,11 +10,11 @@ export const useAuth = () => {
 
     const navigate = useNavigate();
 
-    const {login } = useSelector(state => state.auth);
+    const {login, isLoginLoading } = useSelector(state => state.auth);
 
     const handlerLogin = async ({email, password}) => {        
         try {
-            dispatch(isLoginLoading());
+            dispatch(onLoading());
             const response = await loginUser({email, password});
             const token = response.data.token;
             const claims = JSON.parse(window.atob(token.split(".")[1]));
@@ -40,6 +40,7 @@ export const useAuth = () => {
     }
 
     const handlerLogout = () => {
+        navigate('/');
         dispatch(onLogout());
         sessionStorage.removeItem('login');
         sessionStorage.removeItem('token');

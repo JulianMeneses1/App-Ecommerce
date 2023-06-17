@@ -115,10 +115,20 @@ export const NewProduct = () => {
                             value="0"
                             {...register("id")}/> 
                     </div>           
-                    <div className="d-flex justify-content-center gap-5 mt-3">
-                            <button id="submitBtn" type="submit" className="btn btn-primary btn-lg ">Enviar</button>
-                            <button id="resetBtn" type="button" className="btn btn-danger btn-lg" onClick={resetForm}>Resetear Formulario</button>
+                    <div className="d-flex justify-content-center gap-5 mt-3">                    
+                        <button id="resetBtn" type="button" className="btn btn-danger btn-lg" onClick={resetForm}>Resetear Formulario</button>
+                        { isLoginLoading 
+                            ? <button id="submitBtn" type="submit" className="w-50 btn btn-primary btn-lg ">
+                                    <div className="d-flex justify-content-between">
+                                        <p className="mb-0">Procesando</p>
+                                        <div className="spinner-border text-info me-1" role="status"></div>
+                                    </div>
+                                </button>
+                            : <button id="submitBtn" type="submit" className="btn btn-primary btn-lg ">Enviar</button>
+                        }
                     </div>
+
+                    
                 </form>
             </div>
         </>

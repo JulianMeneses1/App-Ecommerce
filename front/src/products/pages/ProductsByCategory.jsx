@@ -9,7 +9,7 @@ export const ProductsByCategory = () => {
     
     const {
         productsCategories,
-        isLoadingCategories,
+        isLoading,
         paginator,
         getProductsCategories,
         getCategoryName
@@ -27,7 +27,7 @@ export const ProductsByCategory = () => {
         getProductsCategories(category, page);            
     },[category, page])    
 
-    if (isLoadingCategories) {
+    if (isLoading) {
         return (
             <div style={{height:"90vh"}} className="d-flex align-items-center justify-content-center">
                 <div className="spinner-border text-primary" role="status">
