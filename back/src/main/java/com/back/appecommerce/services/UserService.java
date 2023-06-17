@@ -16,6 +16,7 @@ public interface UserService {
     public void delete (Long id);
     public List<UserDto> findAll();
     public Optional<UserDto> findById(Long id);
-    public Optional<UserDto> update (UserRequest user, Long id);    
+    public Optional<UserDto> update (UserRequest user, Long id);  
+    public boolean existsByEmail(String email);
 
 }

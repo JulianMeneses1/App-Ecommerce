@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useFiles } from "../hooks/useFiles";
+import { useProducts } from "../hooks/useProducts";
+import { useEffect } from "react";
 
 export const NewProduct = () => {
 
@@ -9,8 +11,28 @@ export const NewProduct = () => {
 
     const { uploadFile, resetImg, errorSize, urlUploadedFile } = useFiles();
 
-    const onSubmit = data => { console.log(data) };
+    const { handlerAddOrUpdateProduct, errors: errorTitle, cleanErrors } = useProducts();
 
+    const resetForm = () => {
+        reset(); 
+        resetImg();
+        cleanErrors();
+    }
+
+    useEffect(()=>resetForm(), [])
+
+    const onSubmit = async(data) => { 
+        if (errorSize) {
+            return;
+        }     
+        const categorySelect = document.querySelector(`#category option[value="${data.category}"]`); 
+        const categoryName = categorySelect ? categorySelect.getAttribute("data-name") : null; 
+        data.image=urlUploadedFile;
+        data.category = {id: parseInt(data.category)};       
+        if  (await handlerAddOrUpdateProduct(data, categoryName)) {
+            resetForm();  
+        }
+    };
     return (
         <>
             <div className="formEvent container my-4 d-flex align-items-center">
@@ -25,10 +47,10 @@ export const NewProduct = () => {
                                 id="title"
                                 maxLength="100"
                                 {...register("title", { required: true, minLength: 6 })}
-                                className={`form-control ${watchAllFields?.title?.length > 5 && 'is-valid'} ${errors.title && 'is-invalid'}`}
+                                className={`form-control ${watchAllFields?.title?.length > 5 && !errorTitle.title && 'is-valid'} ${errors.title && 'is-invalid'}`}
                             />
                            {errors.title?.type === 'required' && <p className="text-danger mb-0">El título es obligatorio</p>}
-                           {errors.title?.type === 'minLength' && <p className="text-danger mb-0">El título debe tener mínimo 6 caracteres</p>}                         
+                           {errors.title?.type === 'minLength' && <p className="text-danger mb-0">El título debe tener mínimo 6 caracteres</p>} 
                         </div>
                         <div className="col-xxl-4 col-lg-6 col-md-12 my-1">
                             <label htmlFor="description" className="form-label">Descripción</label>
@@ -64,11 +86,11 @@ export const NewProduct = () => {
                                 {...register("category", {required:true})}
                             >
                                 <option value="">Seleccione una categoría</option>
-                                <option value="1">Notebook</option>
-                                <option value="2">Monitor</option>
-                                <option vale="3">PC de Escritorio</option>
-                                <option value="4">Placa de Video</option>                        
-                                <option value="5">Microprocesador</option>                        
+                                <option value="1" data-name="notebooks">Notebook</option>                                
+                                <option value="2" data-name="pcs">PC de Escritorio</option>
+                                <option value="3" data-name="monitores">Monitor</option>
+                                <option value="4" data-name="placasDeVideo">Placa de Video</option>                        
+                                <option value="5" data-name="microprocesadores">Microprocesador</option>                        
                             </select>
                             {errors.category?.type == 'required' && <p className="text-danger mb-0">Debe elegir una categoría</p>}
                         </div>            
@@ -82,9 +104,8 @@ export const NewProduct = () => {
                                     accept="image/*"
                                     {...register("image", {required: true})}
                                     onChange= {uploadFile}
-                                    
                                 /> 
-                                {urlUploadedFile != "" && <img className="imagenEdicion mb-1" src={urlUploadedFile}/> }
+                                {urlUploadedFile && <img className="imagenEdicion mb-1" src={urlUploadedFile}/> }
                             </div> 
                             {errors.image?.type == 'required' && <p className="text-danger mb-0">Debe subir una imagen</p>} 
                             {errorSize && <p className="text-danger mb-0">La imagen no puede pesar más de 3 mb</p>}
@@ -96,7 +117,7 @@ export const NewProduct = () => {
                     </div>           
                     <div className="d-flex justify-content-center gap-5 mt-3">
                             <button id="submitBtn" type="submit" className="btn btn-primary btn-lg ">Enviar</button>
-                            <button id="resetBtn" type="button" className="btn btn-danger btn-lg" onClick={()=> {reset(); resetImg()}}>Resetear Formulario</button>
+                            <button id="resetBtn" type="button" className="btn btn-danger btn-lg" onClick={resetForm}>Resetear Formulario</button>
                     </div>
                 </form>
             </div>

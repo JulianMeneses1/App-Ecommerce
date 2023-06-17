@@ -19,16 +19,14 @@ export const useAuth = () => {
             const token = response.data.token;
             const claims = JSON.parse(window.atob(token.split(".")[1]));
             const user = { username: claims.sub[0].toUpperCase() + claims.sub.slice(1) };
-
-            dispatch(onLogin({user, isAdmin: claims.isAdmin }));   
-
+            navigate('/')
+            dispatch(onLogin({user, isAdmin: claims.isAdmin }));  
             sessionStorage.setItem('login',JSON.stringify({
                 isAuth: true,
                 isAdmin: claims.isAdmin,
                 user
             }));
-            sessionStorage.setItem('token', `Bearer ${token}`);
-            navigate('/')
+            sessionStorage.setItem('token', `Bearer ${token}`);            
         } catch (error) {
             dispatch(onLogout());
             if(error.response?.status == 401) {

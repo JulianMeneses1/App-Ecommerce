@@ -8,19 +8,23 @@ export const useFiles = () => {
 
     const [ errorSize, setErrorSize] = useState(false);
 
-    const [ urlUploadedFile, setUrlUploadedFile] = useState('');
+    const [ urlUploadedFile, setUrlUploadedFile] = useState();
 
     const navigate = useNavigate();
 
     const {handlerLogout} = useAuth();
     
-    const uploadFile = async (event) => {
-        const file = event.target.files[0];   
+    const uploadFile = async (event) => {       
+        const file = event.target.files[0]; 
+        if (!file) {
+            setUrlUploadedFile(undefined);
+            return;
+        } 
         if (file) {
           if (file.size > 3000000) {
             setErrorSize(true);
             setUrlUploadedFile('');
-            return false;
+            return;
           }      
           try {
                 const formData = new FormData();
@@ -28,7 +32,7 @@ export const useFiles = () => {
                 const result = await save(formData);
                 setUrlUploadedFile(result.data.url);
                 setErrorSize(false);
-                return true;
+                return;
             } catch (error) {
                 if (error.response?.status == 401) {
                     Swal.fire(

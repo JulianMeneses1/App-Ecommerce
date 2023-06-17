@@ -17,8 +17,10 @@ export const Carousel = ({ products, category }) => {
                                 { products.slice(0,3).map((product) => (      
                                     <div key={product.id} className={`card ${styles.cardModule}`}>                                                                                                         
                                         <NavLink  className="nav-link" to={`/producto/${product.category.name}/${product.title.replace(/[./ ]/g, "-")}/${product.id}`}>
-                                            <img src={product.image} className="card-img-top"/>                                                                 
-                                            <div className="card-body"> 
+                                            <div className='card-container-img d-flex'>
+                                                <img src={product.image} className="card-img-top"/> 
+                                            </div>                                                                
+                                            <div className="card-body "> 
                                                 <h4 className="card-text">{"$ " + product.price}</h4>                                    
                                                 <p className="card-title">{product.title}</p>
                                             </div>
@@ -33,7 +35,9 @@ export const Carousel = ({ products, category }) => {
                                  { products.slice(-3).map((product) => (      
                                      <div key={product.id} className={`card ${styles.cardModule}`}>                                                                                                         
                                          <NavLink className="nav-link" to={`/producto/${product.category.name}/${product.title.replace(/[./ ]/g, "-")}/${product.id}`}>
-                                             <img src={product.image} className="card-img-top"/>                                                                 
+                                             <div className='card-container-img d-flex '>
+                                                <img src={product.image} className="card-img-top"/> 
+                                             </div>                                                                
                                              <div className="card-body">                                     
                                                 <h4 className="card-text">{"$ " + product.price}</h4>                                    
                                                 <p className="card-title">{product.title}</p>
@@ -62,7 +66,9 @@ export const Carousel = ({ products, category }) => {
                        { products.slice(0,2).map((product )=> (
                             <div className={`card ${styles.cardModule}`} key={product.id}>                                    
                                 <NavLink className="nav-link" to={`/producto/${product.category.name}/${product.title.replace(/[./ ]/g, "-")}/${product.id}`}>
-                                    <img src={product.image} className="card-img-top"/>                                
+                                    <div className='card-container-img d-flex '>
+                                            <img src={product.image} className="card-img-top"/> 
+                                    </div>                              
                                     <div className="card-body">
                                         <h4 className="card-title">{"$ " + product.price}</h4>
                                         <p className="card-text">{product.title}</p>                                    
@@ -76,7 +82,9 @@ export const Carousel = ({ products, category }) => {
                        { products.slice(-2).map((product )=> (
                             <div className={`card ${styles.cardModule}`} key={product.id}>                                    
                                 <NavLink className="nav-link" to={`/producto/${product.category.name}/${product.title.replace(/[./ ]/g, "-")}/${product.id}`}>
-                                    <img src={product.image} className="card-img-top"/>                                
+                                    <div className='card-container-img d-flex '>
+                                        <img src={product.image} className="card-img-top"/> 
+                                    </div>                               
                                     <div className="card-body">
                                         <h4 className="card-title">{"$ " + product.price}</h4>
                                         <p className="card-text">{product.title}</p>                                    

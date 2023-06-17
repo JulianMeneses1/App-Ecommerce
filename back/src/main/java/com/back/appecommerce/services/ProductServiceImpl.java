@@ -20,8 +20,8 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     @Transactional
-    public List<Product> save(List<Product> products) {
-        return repository.saveAll(products);        
+    public Product save(Product product) {
+        return repository.save(product);        
     }
 
     @Override
@@ -79,4 +79,9 @@ public class ProductServiceImpl implements ProductService{
         }
         return Optional.empty();
     }    
+
+    @Override
+    public boolean existsByTitle(String title) {
+        return repository.existsByTitle(title);
+    }
 }

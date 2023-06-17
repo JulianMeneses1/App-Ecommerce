@@ -76,24 +76,29 @@ public class ProductController {
     }
     
     @PostMapping
-    public ResponseEntity<?> createProducts(@Valid @RequestBody List<Product> products, BindingResult result) {
+    public ResponseEntity<?> createProducts(@Valid @RequestBody Product product, BindingResult result) {
         if(result.hasErrors()){
             return validation(result);
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body(productService.save(products));
+        if(productService.existsByTitle(product.getTitle())) {
+            return ResponseEntity.internalServerError().body("El título del producto ya existe");
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(productService.save(product));
     }
     
     @PutMapping("/{id}")
      public ResponseEntity<?> updateProduct(@Valid @RequestBody Product product, BindingResult result, @PathVariable Long id) { 
-         if(result.hasErrors()){
+        if(result.hasErrors()){
             return validation(result);
-        }         
+        }  
+        if(productService.existsByTitle(product.getTitle())) {
+            return ResponseEntity.internalServerError().body("El título del producto ya existe");
+        }
         Optional<Product> optionalProduct = productService.update (product, id);
         if (optionalProduct.isPresent()) {
             return ResponseEntity.status(HttpStatus.CREATED).body(optionalProduct.orElseThrow());
         }
         return ResponseEntity.notFound().build();
-
     } 
  
     @DeleteMapping("/{id}")

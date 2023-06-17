@@ -50,6 +50,9 @@ public class UserController {
         if(result.hasErrors()){
             return validation(result);
         }
+        if(service.existsByEmail(user.getEmail())) {
+            return ResponseEntity.internalServerError().body("Ya existe un usuario con el email ingresado");
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(user));
     }
     
@@ -57,7 +60,10 @@ public class UserController {
      public ResponseEntity<?> updateUser(@Valid @RequestBody UserRequest user, BindingResult result, @PathVariable Long id) { 
          if(result.hasErrors()){
             return validation(result);
-        }         
+        } 
+        if(service.existsByEmail(user.getEmail())) {
+            return ResponseEntity.internalServerError().body("Ya existe un usuario con el email ingresado");
+        }
         Optional<UserDto> optionalUser = service.update (user, id);
         if (optionalUser.isPresent()) {
             return ResponseEntity.status(HttpStatus.CREATED).body(optionalUser.orElseThrow());

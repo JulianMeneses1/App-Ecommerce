@@ -26,42 +26,31 @@ export const productsSlice = createSlice({
     },
     reducers: {
         addProduct: (state, {payload: {category, product}}) => {
-
-            const addProductByPage = (page) => {
-                state[page][category] = [
-                    ...state[page][category], 
-                    {
-                        ...product
-                    } 
-                ];
-            };            
-            addProductByPage(productsHome);
-            addProductByPage(productsCategories);          
+            console.log(category, product)
+            
+            state.productsHome[category] = [
+                ...state.productsHome[category], 
+                {
+                    ...product
+                } 
+            ]                                 
         },
         removeProduct: (state, {payload: {category, id}}) => {
 
-            const removeProductByPage = (page) => {
-                state[page][category] = state[page][category].filter(
+            state.productsHome[category] = state.productsHome[category].filter(
                 (product) => product.id !== id
-              );
-            }
-            removeProductByPage(productsHome);
-            removeProductByPage(productsCategories);
+              );            
         },
         updateProduct:  (state, {payload: {category, product }}) => {
 
-            const updateProductByPage = (page) => {
-                state[page][category] = state[page][category].map( existingProduct => { 
-                    if (existingProduct.id !== product.id) {
-                        return {
-                            ...product
-                        }                    
-                    };
-                    return existingProduct;
-                })
-            }
-            updateProductByPage(productsHome);
-            updateProductByPage(productsCategories)            
+            state.productsHome[category] = state.productsHome[category].map( existingProduct => { 
+                if (existingProduct.id !== product.id) {
+                    return {
+                        ...product
+                    }                    
+                };
+                return existingProduct;
+            })                      
         },     
         loadingProductsHome: (state, {payload: {category, data, page}}) => {
             state.paginator = data;

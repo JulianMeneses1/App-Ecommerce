@@ -60,29 +60,37 @@ export const useProducts = () => {
         }
     }
 
-    const handlerAddOrUpdateProduct = async (product, category) => {
+    const cleanErrors = () => {
+        dispatch(setErrors({}));
+    }
+
+    const handlerAddOrUpdateProduct = async (product,category) => {
         try {
             let response;
-            if (product.id === 0 ) {
+            if (product.id == 0 ) {
                 response = await save(product);
                 dispatch(addProduct({product: response.data, category}));
             } else {
                 response = await update(product);
                 dispatch(updateProduct({product: response.data, category}));
-            };         
-            Swal.fire(
-                (product.id=== 0) ? 'Producto Creado' : 'Usuario Actualizado',
-                (product.id=== 0) ? 'El producto '+ product.title +' ha sido creado exitosamente' :
+            };
+            dispatch(setErrors({}))                      
+            Swal.fire(                
+                (product.id== 0) ? 'Producto Creado' : 'Usuario Actualizado',
+                (product.id== 0) ? 'El producto '+ product.title +' ha sido creado exitosamente' :
                 'El producto '+ product.title +' ha sido actualizado exitosamente',
                 'success'
             );
+            return true;
         } catch (error) {
-            if (error.response && error.response.status == 500 &&
-                error.response.data?.message?.includes('constraint'))
-            {
-                if (error.response.data?.message?.includes('UK_title')) {
-                    dispatch(setErrors({title: 'El título ingresado ya existe'}))
-                }
+            if (error.response && error.response.status == 500)
+            {                    
+                dispatch(setErrors({title: 'Este título ya existe'}));
+                Swal.fire(
+                    'Error Título',
+                    'El título ingresado ya existe',
+                    'error'
+                )              
             }
             else if (error.response?.states == 401) {
                 Swal.fire(
@@ -90,16 +98,17 @@ export const useProducts = () => {
                     'Lo sentimos, parece que su sesión ha expirado, debe volver a iniciar sesión',
                     'warning'
                 )  
-                handlerLogout();
-                navigate("/");  
+                navigate("/"); 
+                handlerLogout();                 
             }
             else {
                 throw error;
-            }
+            };
+            return false;
         }
     }
 
-    const handlerRemoveProduct = async (id, category) => {
+    const handlerRemoveProduct = async (category,id) => {
         Swal.fire({
             title: '¿Esta seguro que desea eliminar este producto?',              
             icon: 'warning',
@@ -124,9 +133,9 @@ export const useProducts = () => {
                             'Sesión Inválida',
                             'Lo sentimos, parece que su sesión ha expirado, debe volver a iniciar sesión',
                             'warning'
-                        )    
-                        handlerLogout();
-                        navigate("/");  
+                        ) 
+                        navigate("/");    
+                        handlerLogout();                         
                    }
                    else {
                     throw error;
@@ -145,6 +154,7 @@ export const useProducts = () => {
         isLoadingCategories, 
         isLoadingProduct,
         paginator,
+        cleanErrors,
         handlerAddOrUpdateProduct,
         handlerRemoveProduct,
         getProductsHome,

@@ -27,7 +27,7 @@ export const findById = async (id) => {
 
 export const save = async ({title, description, image, price, category}) => {
     try {
-        return await productsApi.post(BASE_URL, {
+        return await productsApi.post('', {
             title, 
             description, 
             image,
@@ -55,7 +55,7 @@ export const update = async ({title, description, image, price, category, id}) =
 }
 export const remove = async (id) => {
     try {
-        await productsApi.delete(`${BASE_URL}/${id}`);
+        await productsApi.delete(`''/${id}`);
     } catch (error) {
         throw error;
     }   

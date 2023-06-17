@@ -4,6 +4,16 @@ body {
     min-height: 100vh; 
 }
 
+.card .card-container-img {
+    height: 20rem;
+}
+
+.card-body {
+    height: 10rem;
+    padding-top: 3em;
+    overflow:hidden
+}
+
 /* Navbar */
 
 nav .nav-link{
@@ -33,8 +43,6 @@ nav svg:hover {
 
 /* Formulario Nuevo Producto */
 
-
-
 .formEvent {
     min-height: 70vh;
 }
@@ -54,8 +62,6 @@ nav svg:hover {
 .formEvent img {
     height: 8em;
 }
-
-
 
 @media screen and (max-width: 800px ) {
     
