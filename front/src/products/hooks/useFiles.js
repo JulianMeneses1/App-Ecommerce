@@ -23,7 +23,6 @@ export const useFiles = () => {
             return false;
           }      
           try {
-                setTimeout(5000)
                 const formData = new FormData();
                 formData.append('file', file);
                 const result = await save(formData);

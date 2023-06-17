@@ -2,9 +2,7 @@
 package com.back.appecommerce.controllers;
 
 import com.back.appecommerce.models.entities.Category;
-import com.back.appecommerce.models.entities.Product;
 import com.back.appecommerce.services.CategoryService;
-import com.back.appecommerce.services.ProductService;
 import jakarta.validation.Valid;
 import java.util.HashMap;
 import java.util.List;

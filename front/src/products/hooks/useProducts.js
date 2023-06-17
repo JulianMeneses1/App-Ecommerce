@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { findByCategoryPages, findById, remove, save, update } from "../services/productsService";
-import { addProduct, loadingProduct, loadingProductsCategories, loadingProductsHome, removeProduct, setErrors, updateProduct } from "../../store/slices/products/productsSlice";
+import { addProduct, onLoading, loadingProduct, loadingProductsCategories, loadingProductsHome, removeProduct, setErrors, updateProduct } from "../../store/slices/products/productsSlice";
 import { useAuth } from "../../auth/hooks/useAuth";
 
 export const useProducts = () => {
@@ -32,7 +32,7 @@ export const useProducts = () => {
     }
 
     const getProductsHome = async (category, page = 0, size = 6 ) => {
-        try {
+        try {            
             const result = await findByCategoryPages(category, page, size );
             dispatch(loadingProductsHome({ data: result.data, category, page: "Home" }));
         } catch (error) {
@@ -42,6 +42,7 @@ export const useProducts = () => {
 
     const getProductsCategories = async (category, page = 0, size = 6 ) => {
         try {
+            dispatch(onLoading());
             const result = await findByCategoryPages(category, page, size );
             dispatch(loadingProductsCategories({ data: result.data, category, page: "Categories" }));
         } catch (error) {
@@ -51,6 +52,7 @@ export const useProducts = () => {
 
     const getProduct = async (id) => {
         try {
+            dispatch(onLoading());
             const result = await findById(id);
             dispatch(loadingProduct(result.data));
         } catch (error) {

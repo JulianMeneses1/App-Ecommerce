@@ -79,6 +79,10 @@ export const productsSlice = createSlice({
         },
         setErrors: (state, action) => {
             state.errors = action.payload;
+        },
+        onLoading: (state) => {
+            state.isLoadingCategories = true;
+            state.isLoadingProduct = true
         }      
     }
 });
@@ -93,5 +97,6 @@ export const {
     isLoadingProduct,
     isLoadingCategories,
     isLoadingHome,
+    onLoading,
     setErrors
 } = productsSlice.actions
