@@ -7,7 +7,7 @@ import { useAuth } from "../../auth/hooks/useAuth";
 
 export const useProducts = () => {
     
-    const { productsHome, product, productsCategories, isLoadingHome, isLoadingCategories, isLoadingProduct, paginator, errors} = useSelector(state => state.products);
+    const { productsHome, product, productsCategories, isLoading, finishLoading, paginator, errors} = useSelector(state => state.products);
     const { handlerLogout } = useAuth();
     const dispatch = useDispatch();
     const navigate = useNavigate();  
@@ -32,11 +32,13 @@ export const useProducts = () => {
     }
 
     const getProductsHome = async (category, page = 0, size = 6 ) => {
-        try {            
+        try {
+            dispatch(onLoading());           
             const result = await findByCategoryPages(category, page, size );
             dispatch(loadingProductsHome({ data: result.data, category, page: "Home" }));
         } catch (error) {
-            throw error;
+            dispatch(finishLoading()); 
+            throw error;            
         }
     }
 
@@ -46,6 +48,7 @@ export const useProducts = () => {
             const result = await findByCategoryPages(category, page, size );
             dispatch(loadingProductsCategories({ data: result.data, category, page: "Categories" }));
         } catch (error) {
+            dispatch(finishLoading()); 
             throw error;
         }
     }
@@ -56,6 +59,7 @@ export const useProducts = () => {
             const result = await findById(id);
             dispatch(loadingProduct(result.data));
         } catch (error) {
+            dispatch(finishLoading()); 
             throw error;
         }
     }
@@ -66,6 +70,7 @@ export const useProducts = () => {
 
     const handlerAddOrUpdateProduct = async (product,category) => {
         try {
+            dispatch(onLoading())  
             let response;
             if (product.id == 0 ) {
                 response = await save(product);
@@ -104,11 +109,12 @@ export const useProducts = () => {
             else {
                 throw error;
             };
+            dispatch(finishLoading()); 
             return false;
         }
     }
 
-    const handlerRemoveProduct = async (category,id) => {
+    const handlerRemoveProduct = async (category,id) => {        
         Swal.fire({
             title: '¿Esta seguro que desea eliminar este producto?',              
             icon: 'warning',
@@ -119,6 +125,7 @@ export const useProducts = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
+                    dispatch(onLoading())  
                     await remove(id);
                     dispatch (removeProduct({category, id }));                    
                     Swal.fire(
@@ -140,6 +147,7 @@ export const useProducts = () => {
                    else {
                     throw error;
                    }
+                   dispatch(finishLoading()); 
                 }                  
             }
           })     
@@ -150,9 +158,7 @@ export const useProducts = () => {
         productsCategories,
         product,
         errors,
-        isLoadingHome, 
-        isLoadingCategories, 
-        isLoadingProduct,
+        isLoading,
         paginator,
         cleanErrors,
         handlerAddOrUpdateProduct,

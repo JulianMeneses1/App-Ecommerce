@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux"
 import { loginUser } from "../services/authService"
-import { onLogin, onLogout, onInitLogin } from "../../store/slices/auth/authSlice";
+import { onLogin, onLogout, isLoginLoading } from "../../store/slices/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 
 export const useAuth = () => {
@@ -14,7 +14,7 @@ export const useAuth = () => {
 
     const handlerLogin = async ({email, password}) => {        
         try {
-            dispatch(onInitLogin());
+            dispatch(isLoginLoading());
             const response = await loginUser({email, password});
             const token = response.data.token;
             const claims = JSON.parse(window.atob(token.split(".")[1]));
@@ -46,8 +46,9 @@ export const useAuth = () => {
     }
 
     return {
+        isLoginLoading,
+        login,
         handlerLogin,
-        handlerLogout,
-        login
+        handlerLogout        
     }
 }

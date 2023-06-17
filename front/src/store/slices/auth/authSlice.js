@@ -3,16 +3,20 @@ import { createSlice } from "@reduxjs/toolkit";
 export const initialLogin = JSON.parse(sessionStorage.getItem('login')) || {
     isAuth: false,
     isAdmin: false,
-    user: undefined,
-    isLoginLoading: false
+    user: undefined
 }
 
+export const initialErrors = {
+    email: ''
+}
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState: {
         login: initialLogin,
-        isSignIn: true
+        isSignIn: true,
+        errors: initialErrors,
+        isLoginLoading: false
     },
     reducers: {
         onToggleSignIn: (state) => {
@@ -22,23 +26,37 @@ export const authSlice = createSlice({
             state.login.isAuth = true,
             state.login.isAdmin = action.payload.isAdmin,
             state.login.user = action.payload.user,
-            state.login.isLoginLoading = false;
+            state.isLoginLoading = false;
         },
         onLogout: (state) => {
             state.login.isAuth = false,
             state.login.isAdmin = false,
             state.login.user = undefined,
-            state.login.isLoginLoading = false;
+            state.isLoginLoading = false
         },
-        onInitLogin: (state) => {
-            state.isLoginLoading = true;
-        }
+        onCreateUser: (state) => {
+            state.isCreatingUserLoading = false;
+            state.isLoginLoading = false;
+        },
+        setErrors: (state, action) => {
+            state.errors = action.payload;
+        },
+        onLoading: (state) => {            
+            state.isLoginLoading = true
+        },
+        finishLoading: (state) => {
+            state.isLoginLoading = false
+        }    
     }
 });
 
 export const {
     onLogin,
-    onLogout,
-    onInitLogin,
-    onToggleSignIn
+    onLogout,    
+    onLoading,
+    onToggleSignIn,
+    isLoginLoading,
+    finishLoading,
+    setErrors,
+    onCreateUser
 } = authSlice.actions

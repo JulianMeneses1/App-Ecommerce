@@ -12,14 +12,16 @@ export const initialProducts = {
     microprocesadores: []
 }
 
-export const productsSlice = createSlice({
+export const cartSlice = createSlice({
     name: 'products',
     initialState: {
         productsHome: initialProducts,  
         productsCategories: initialProducts, 
         product: {},  
         errors: initialErrors,  
-        isLoading: false,
+        isLoadingHome: true,
+        isLoadingCategories: true,
+        isLoadingProduct: true,
         paginator: {}
     },
     reducers: {
@@ -30,18 +32,16 @@ export const productsSlice = createSlice({
                 {
                     ...product
                 } 
-            ] 
-            state.isLoading = false;                                 
+            ]                                 
         },
         removeProduct: (state, {payload: {category, id}}) => {
 
             state.productsHome[category] = state.productsHome[category].filter(
                 (product) => product.id !== id
-              ); 
-            state.isLoading = false;            
+              );            
         },
         updateProduct:  (state, {payload: {category, product }}) => {
-           
+
             state.productsHome[category] = state.productsHome[category].map( existingProduct => { 
                 if (existingProduct.id == product.id) {
                     return {
@@ -50,32 +50,29 @@ export const productsSlice = createSlice({
                 };
                 return existingProduct;
             }) 
-            state.product = product ; 
-            state.isLoading = false;                    
+            state.product = product                     
         },     
         loadingProductsHome: (state, {payload: {category, data, page}}) => {
-            state.paginator = data;               
-            state[`products${page}`][category] = data.content  
-            state.isLoading = false;                
+            state.paginator = data;
+            state.isLoadingHome = false;    
+            state[`products${page}`][category] = data.content                 
         },
         loadingProductsCategories: (state, {payload: {category, data, page}}) => {
-            state.paginator = data;              
-            state[`products${page}`][category] = data.content
-            state.isLoading = false;                   
+            state.paginator = data;
+            state.isLoadingCategories = false;    
+            state[`products${page}`][category] = data.content                 
         },
-        loadingProduct: (state, {payload}) => {            
-            state.product = payload; 
-            state.isLoading = false;              
+        loadingProduct: (state, {payload}) => {
+            state.isLoadingProduct = false; 
+            state.product = payload;              
         },
         setErrors: (state, action) => {
             state.errors = action.payload;
         },
-        onLoading: (state) => {            
-            state.isLoading = true
-        },
-        finishLoading: (state) => {
-            state.isLoading = false
-        }    
+        onLoading: (state) => {
+            state.isLoadingCategories = true;
+            state.isLoadingProduct = true
+        }      
     }
 });
 
@@ -86,8 +83,9 @@ export const {
     loadingProductsHome,
     loadingProductsCategories,
     loadingProduct,
-    isLoading,
-    finishLoading,
+    isLoadingProduct,
+    isLoadingCategories,
+    isLoadingHome,
     onLoading,
     setErrors
 } = productsSlice.actions

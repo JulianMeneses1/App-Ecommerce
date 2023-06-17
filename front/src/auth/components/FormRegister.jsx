@@ -1,16 +1,33 @@
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { onToggleSignIn } from "../../store/slices/auth/authSlice";
+import { useState } from "react";
+import { useAuth } from "../hooks/useAuth";
+import { useUsers } from "../hooks/useUsers";
 
 export const FormRegister = ({emailPattern, passwordPattern}) => {
 
-    const { register, handleSubmit, watch, getFieldState, formState: { errors }, clearErrors } = useForm();
+    const { register, handleSubmit, watch, getFieldState, formState: { errors } } = useForm();
+
+    const { handlerCreateUser, errors: errorEmailUnique, isCreatingUserLoading } = useUsers();
 
     const watchAllFields = watch();   
 
-    const dispatch = useDispatch();
+    const onSubmit = async(data) => {              
+        if  (await handlerCreateUser(data)) {
+            resetForm();  
+        }
+    };
 
-    const onSubmit = data => console.log(data);
+    if (isCreatingUserLoading) {
+        return (
+            <div style={{height:"90vh"}} className="d-flex align-items-center justify-content-center">
+                <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        )
+    }
 
     return (
         <>
@@ -60,7 +77,7 @@ export const FormRegister = ({emailPattern, passwordPattern}) => {
                                 id="email"
                                 maxLength="40"
                                 {...register("email", { required: true, pattern: emailPattern })}
-                                className={`form-control ${watchAllFields?.email?.match(emailPattern) && 'is-valid' } ${errors.email && 'is-invalid'}`}
+                                className={`form-control ${watchAllFields?.email?.match(emailPattern) && !errorEmailUnique && 'is-valid' } ${errors.email && 'is-invalid'}`}
                             />
                             {errors.email?.type === 'required' && <p className="text-danger mb-0">Email requerido</p>}
                             {errors.email?.type === 'pattern' && <p className="text-danger mb-0">El email ingresado no es válido</p>}                         

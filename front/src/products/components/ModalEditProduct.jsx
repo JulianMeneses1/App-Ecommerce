@@ -13,7 +13,7 @@ export const ModalEditProduct = ({product}, props)=> {
 
   const { uploadFile, resetImg, errorSize, urlUploadedFile } = useFiles();
 
-  const { handlerAddOrUpdateProduct, errors: errorTitle, cleanErrors } = useProducts();
+  const { handlerAddOrUpdateProduct, errors: errorTitleUnique, cleanErrors } = useProducts();
 
   const resetForm = () => {
       reset(); 
@@ -81,7 +81,7 @@ export const ModalEditProduct = ({product}, props)=> {
                         defaultValue={product.title}
                         maxLength="100"
                         {...register("title", { required: true, minLength: 6 })}
-                        className={`form-control ${watchAllFields?.title?.length > 5 && !errorTitle.title && 'is-valid'} ${errors.title && 'is-invalid'}`}
+                        className={`form-control ${watchAllFields?.title?.length > 5 && !errorTitleUnique.title && 'is-valid'} ${errors.title && 'is-invalid'}`}
                     />
                     {errors.title?.type === 'required' && <p className="text-danger mb-0">El título es obligatorio</p>}
                     {errors.title?.type === 'minLength' && <p className="text-danger mb-0">El título debe tener mínimo 6 caracteres</p>} 
