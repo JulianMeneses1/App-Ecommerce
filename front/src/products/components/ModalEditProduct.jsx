@@ -13,7 +13,7 @@ export const ModalEditProduct = ({product}, props)=> {
 
   const { uploadFile, resetImg, errorSize, urlUploadedFile } = useFiles();
 
-  const { handlerAddOrUpdateProduct, errors: errorTitleUnique, cleanErrors, isLoading } = useProducts();
+  const { handlerAddOrUpdateProduct, errors: errorTitleUnique, cleanErrors } = useProducts();
 
   const resetForm = () => {
       reset(); 
@@ -26,7 +26,7 @@ export const ModalEditProduct = ({product}, props)=> {
   const onSubmit = async(data) => { 
       if (errorSize) {
           return;
-      }   
+      } 
       if (!urlUploadedFile) {
         data.image=product.image;
       } else {
@@ -106,7 +106,7 @@ export const ModalEditProduct = ({product}, props)=> {
                         type="number" 
                         placeholder="Precio del evento"                        
                         id="price"
-                        defaultValue={product.price}
+                        defaultValue={parseInt(product.price)}
                         {...register("price", { required: true, min: 0, max:10000000})}
                         className={`form-control ${(watchAllFields?.price > 0 && watchAllFields?.price < 10000000) && 'is-valid'} ${errors.price && 'is-invalid'}`} 
                         />
@@ -149,21 +149,13 @@ export const ModalEditProduct = ({product}, props)=> {
                 </div>
                 <input 
                     className="d-none" 
-                    value={product.id}
+                    value={parseInt(product.id)}
                     {...register("id")}/> 
                 </div>        
           </Modal.Body>
           <Modal.Footer style={{ justifyContent: 'space-around'}}>
             <button id="resetBtn" type="button" className="btn btn-secondary btn-lg" onClick={handleClose}>Cerrar</button>
-            { isLoading 
-              ? <button id="submitBtn" type="submit" className="w-50 btn btn-primary btn-lg ">
-                      <div className="d-flex justify-content-between">
-                          <p className="mb-0">Procesando</p>
-                          <div className="spinner-border text-info me-1" role="status"></div>
-                      </div>
-                  </button>
-              : <button id="submitBtn" type="submit" className="btn btn-primary btn-lg">Confirmar</button>
-            }
+            <button id="submitBtn" type="submit" className="btn btn-primary btn-lg">Confirmar</button>   
           </Modal.Footer>
         </form>
       </Modal>

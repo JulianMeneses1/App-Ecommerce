@@ -1,0 +1,42 @@
+.buttonsEdition {
+    cursor: pointer;
+}
+.buttonsEdition:hover {
+   transform: scale(1.10);
+}
+
+.containerColumn > div {
+    height: 8em;
+}
+.containerColumn {
+    padding: 1rem 1rem !important
+}
+
+.container {
+    display: flex;
+    min-height: 65vh;
+}
+
+@media screen and (max-width: 900px) {
+    .containerProductColumn{
+        width: 30% !important;
+    }
+    .container {
+        flex-wrap: wrap !important;
+    }
+    .container > div {
+        width: 100% !important;        
+    }
+    .containerTotal {
+        border-left: none !important;
+        border-bottom: solid 2px gray;
+        margin-bottom: 10px;
+        padding: 20px 0;
+    }
+    .subContainerTotal {
+        display: block;        
+    }   
+  
+    
+}
+

@@ -2,12 +2,12 @@ import { useDispatch, useSelector } from "react-redux"
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { findByCategoryPages, findById, remove, save, update } from "../services/productsService";
-import { addProduct, onLoading, loadingProduct, loadingProductsCategories, loadingProductsHome, removeProduct, setErrors, updateProduct } from "../../store/slices/products/productsSlice";
+import { addProduct, onLoading, loadingProduct, loadingProductsCategories, loadingProductsHome, finishLoading, removeProduct, setErrors, updateProduct } from "../../store/slices/products/productsSlice";
 import { useAuth } from "../../auth/hooks/useAuth";
 
 export const useProducts = () => {
     
-    const { productsHome, product, productsCategories, isLoading, finishLoading, paginator, errors} = useSelector(state => state.products);
+    const { productsHome, product, productsCategories, isLoading, paginator, errors} = useSelector(state => state.products);
     const { handlerLogout } = useAuth();
     const dispatch = useDispatch();
     const navigate = useNavigate();  

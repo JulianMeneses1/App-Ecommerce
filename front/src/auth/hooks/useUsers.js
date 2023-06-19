@@ -14,8 +14,7 @@ export const useUsers = () => {
     const handlerCreateUser = async (user) => {
         try {
             dispatch(onLoading);
-            await save(user); 
-            onCreateUser();           
+            await save(user);           
             dispatch(setErrors({}));
             handlerLogin(user);              
             return true;

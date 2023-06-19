@@ -11,7 +11,7 @@ export const NewProduct = () => {
 
     const { uploadFile, resetImg, errorSize, urlUploadedFile } = useFiles();
 
-    const { handlerAddOrUpdateProduct, errors: errorTitleUnique, cleanErrors } = useProducts();
+    const { handlerAddOrUpdateProduct, errors: errorTitleUnique, cleanErrors, isLoading } = useProducts();
 
     const resetForm = () => {
         reset(); 
@@ -117,7 +117,7 @@ export const NewProduct = () => {
                     </div>           
                     <div className="d-flex justify-content-center gap-5 mt-3">                    
                         <button id="resetBtn" type="button" className="btn btn-danger btn-lg" onClick={resetForm}>Resetear Formulario</button>
-                        { isLoginLoading 
+                        { isLoading 
                             ? <button id="submitBtn" type="submit" className="w-50 btn btn-primary btn-lg ">
                                     <div className="d-flex justify-content-between">
                                         <p className="mb-0">Procesando</p>

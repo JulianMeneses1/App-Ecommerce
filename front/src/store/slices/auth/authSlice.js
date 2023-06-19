@@ -36,7 +36,6 @@ export const authSlice = createSlice({
         },
         onCreateUser: (state) => {
             state.isCreatingUserLoading = false;
-            state.isLoginLoading = false;
         },
         setErrors: (state, action) => {
             state.errors = action.payload;

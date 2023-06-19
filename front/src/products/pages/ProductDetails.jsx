@@ -4,9 +4,12 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux"
 import { useProducts } from "../hooks/useProducts";
 import { ModalEditProduct } from "../components/ModalEditProduct";
+import { useCart } from "../../cart/hooks/useCart";
 
 
 export const ProductDetails = () => {
+
+    const {handlerAddProductCart} = useCart();
 
     const {id} = useParams();
 
@@ -14,15 +17,15 @@ export const ProductDetails = () => {
 
     const { login } = useSelector(state => state.auth);
 
-    const [counter, setCounter] = useState(1);
+    const [quantity, setQuantity] = useState(1);
 
-    const counterIncrement = () => {
-        setCounter (counter + 1);
+    const quantityIncrement = () => {
+        setQuantity (quantity + 1);
     };
 
-    const counterDecrement = () => {
-        if (counter > 1) {
-            setCounter (counter -1)
+    const quantityDecrement = () => {
+        if (quantity > 1) {
+            setQuantity (quantity -1)
             };
     }; 
 
@@ -90,16 +93,16 @@ export const ProductDetails = () => {
                                     <input
                                         type="text"
                                         readOnly={true} 
-                                        value={counter}
+                                        value={quantity}
                                         className={`text-center bg-light form-control counter ${styles.counter}`}
                                         />
-                                    <div className={`buttonsCounter ${styles.buttonsCounter}`}>
-                                        <button className="btn btn-light " onClick={()=> counterIncrement()}>
+                                    <div>
+                                        <button className="btn btn-light " onClick={()=> quantityIncrement()}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" className="bi bi-chevron-up" viewBox="0 0 16 16">
                                                 <path fillRule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
                                             </svg>
                                         </button>
-                                        <button className="btn btn-light"onClick={()=> counterDecrement()}>
+                                        <button className="btn btn-light"onClick={()=> quantityDecrement()}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" className="bi bi-chevron-down" viewBox="0 0 16 16">
                                                 <path fillRule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
                                             </svg>
@@ -109,7 +112,10 @@ export const ProductDetails = () => {
                                 
                                 <button 
                                     type="button"
-                                    className="btn btn-primary btn-lg w-100">Comprar
+                                    className="btn btn-primary btn-lg w-100"
+                                    onClick={()=>handlerAddProductCart(product,quantity)}
+                                >
+                                        Comprar
                                 </button>
                             </div>
                         </div>

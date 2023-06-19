@@ -30,11 +30,11 @@ public class User {
     private Long id;
     
     @NotBlank
-    @Size(min = 4, max = 10, message = "debe tener entre 3 y 10 caracteres")    
+    @Size(min = 3, max = 15, message = "debe tener entre 3 y 15 caracteres")    
     private String name;
     
     @NotBlank
-    @Size(min = 4, max = 10, message = "debe tener entre 3 y 15 caracteres") 
+    @Size(min = 4, max = 15, message = "debe tener entre 3 y 15 caracteres") 
     private String lastName;
     
     @NotBlank

@@ -1,7 +1,11 @@
 body {
     position: relative;
     padding-bottom: 6em;
-    min-height: 100vh; 
+    min-height: 100vh;
+}
+
+html {
+    min-width: min-content;
 }
 
 .card .card-container-img {
@@ -82,5 +86,20 @@ nav svg:hover {
     padding: 40px;
     background: rgb(138, 133, 133);
     border-radius: 20px;
+}
+
+@media screen and (max-width: 800px ) {
+    
+    .formLogin form {
+        width: 100% !important;
+    }
+    .formLogin form > div {
+        display: block !important;
+    }
+
+    .formLogin form>div:last-child button{
+        width: 100% !important;
+    }
+    
 }
 
