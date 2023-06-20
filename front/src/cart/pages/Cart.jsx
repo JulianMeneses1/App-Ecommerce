@@ -1,7 +1,8 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useCart } from "../hooks/useCart"
-import styles from "../../styles/Cart.module.css"
+import { useCart } from "../hooks/useCart";
+import styles from "../../styles/Cart.module.css";
 import { useEffect, useState } from "react";
+import { Payment } from "../components/Payment";
 
 export const Cart = () => {
 
@@ -32,9 +33,18 @@ export const Cart = () => {
             <h3 style={{backgroundColor:"#585880", padding: "5px 15px", marginBottom: "0px"}}>Carro de Compras</h3>
             { cartItems?.length == 0
                 ?
-                <div className="alert alert-warning">
-                    ¡Todavía no hay productos en el carrito de compras! 
-                </div>
+                <>
+                    <div className="alert alert-warning">
+                        ¡Todavía no has cargado ningún producto! 
+                    </div>
+                    <div className="d-flex justify-content-center">
+                        <button  
+                            onClick={()=>navigate('/')}
+                            className="btn btn-primary btn-lg ">
+                            Ver Productos
+                        </button>
+                    </div> 
+                </> 
                 :
                 <>
                     <div className="container-fluid">
@@ -92,7 +102,7 @@ export const Cart = () => {
                                                 </td>
                                                 <td className={styles.containerColumn}>
                                                     <div className="d-flex align-items-center">
-                                                        <svg onClick={()=>handlerDeleteProductCart(item.product.id)} xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="red" className={`bi bi-trash ${styles.buttonsEdition}`} viewBox="0 0 16 16">
+                                                        <svg onClick={()=>handlerDeleteProductCart(item.product.id)} xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="red" className={`bi bi-trash ${styles.buttonsEdition}`} viewBox="0 0 16 16">
                                                             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
                                                             <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
                                                         </svg>
@@ -103,6 +113,11 @@ export const Cart = () => {
                                         }                      
                                     </tbody>
                                 </table>
+                                <div className="text-center">
+                                    <button  
+                                        onClick={()=>navigate('/')}
+                                        className="btn btn-primary btn-lg mt-3">Seguir comprando</button>
+                                </div>
                             </div>
                             <div className={`w-25 d-flex align-items-center justify-content-center ${styles.containerTotal}`} style={{borderLeft:"2px solid gray"}}>
                                 <div className={styles.subContainerTotal}>
@@ -111,20 +126,14 @@ export const Cart = () => {
                                         <h4 className="text-center"> $ {total}</h4>
                                     </div>
                                     <div className="text-center mt-4">
-                                        <button className="btn btn-success btn-lg">Finalizar Compra</button>
+                                        <Payment total = {total}/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </>
-            }
-            <div className="text-center">
-                <button  
-                    onClick={()=>navigate('/')}
-                    className="btn btn-primary btn-lg mt-3">{cartItems?.length == 0 ? "Ver Productos" : "Seguir comprando"}</button>
-            </div>
-            
+            }                    
         </>
     )
 }

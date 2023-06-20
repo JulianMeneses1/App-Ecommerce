@@ -11,12 +11,12 @@ export const useUsers = () => {
     const { handlerLogin}= useAuth();
     const dispatch = useDispatch(); 
     
-    const handlerCreateUser = async (user) => {
+    const handlerCreateUser = async (user, page) => {
         try {
             dispatch(onLoading);
             await save(user);           
             dispatch(setErrors({}));
-            handlerLogin(user);              
+            handlerLogin(user, page);              
             return true;
         } catch (error) {
             if (error.response && error.response.status == 500)

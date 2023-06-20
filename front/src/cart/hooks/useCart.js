@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom";
-import { addProductCart, deleteProductCart, updateQuantityProductCart } from "../../store/slices/cart/cartSlice";
+import { addProductCart, deleteProductCart, resetCart, updateQuantityProductCart } from "../../store/slices/cart/cartSlice";
 import { useEffect } from "react";
 
 export const useCart = () => {
@@ -55,10 +55,15 @@ export const useCart = () => {
         .reduce( (accumulator, total) => accumulator + total, 0);
     }
 
+    const handlerResetCart = () => {
+        dispatch(resetCart());
+    }
+
     return {
         handlerAddProductCart,
         handlerDeleteProductCart,
         handlerUpdateQuantityProductCart,
+        handlerResetCart,
         calculateTotal,
         cartItems
     }

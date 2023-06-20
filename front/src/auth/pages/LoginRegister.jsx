@@ -11,10 +11,12 @@ export const LoginRegister = () => {
 
     return (
         <>
-            {isSignIn 
-                ? <FormLogin emailPattern = {emailPattern}/>
-                : <FormRegister emailPattern = {emailPattern} passwordPattern = {passwordPattern}/>
-            }
+            <div className="formLogin container justify-content-center my-4 d-flex align-items-center">
+                {isSignIn 
+                    ? <FormLogin emailPattern = {emailPattern}/>
+                    : <FormRegister emailPattern = {emailPattern} passwordPattern = {passwordPattern}/>
+                }
+            </div>            
         </>
     )
 }
