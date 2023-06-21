@@ -3,6 +3,8 @@ import { save } from "../services/filesService";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/hooks/useAuth";
+import { useDispatch } from "react-redux";
+import { finishLoading, onLoading } from "../../store/slices/products/productsSlice";
 
 export const useFiles = () => {
 
@@ -12,9 +14,11 @@ export const useFiles = () => {
 
     const navigate = useNavigate();
 
+    const dispatch = useDispatch();
+
     const {handlerLogout} = useAuth();
     
-    const uploadFile = async (event) => {       
+    const uploadFile = async (event) => {              
         const file = event.target.files[0]; 
         if (!file) {
             setUrlUploadedFile(undefined);
@@ -27,14 +31,17 @@ export const useFiles = () => {
             return;
           }      
           try {
+                dispatch(onLoading()); 
                 const formData = new FormData();
                 formData.append('file', file);
                 const result = await save(formData);
                 setUrlUploadedFile(result.data.url);
                 setErrorSize(false);
+                dispatch(finishLoading()); 
                 return;
             } catch (error) {
                 if (error.response?.status == 401) {
+                    dispatch(finishLoading()); 
                     Swal.fire(
                         'Sesión Inválida',
                         'Lo sentimos, parece que su sesión ha expirado, debe volver a iniciar sesión',

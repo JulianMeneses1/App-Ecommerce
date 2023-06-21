@@ -104,7 +104,14 @@ export const NewProduct = () => {
                                     accept="image/*"
                                     {...register("image", {required: true})}
                                     onChange= {uploadFile}
-                                /> 
+                                />
+                                { isLoading &&
+                                    <div style={{height:"30px"}} className="ms-5">
+                                        <div className="spinner-border text-primary" role="status">
+                                            <span className="visually-hidden">Loading...</span>
+                                        </div>
+                                    </div>                                
+                                } 
                                 {urlUploadedFile && <img src={urlUploadedFile}/> }
                             </div> 
                             {errors.image?.type == 'required' && <p className="text-danger mb-0">Debe subir una imagen</p>} 

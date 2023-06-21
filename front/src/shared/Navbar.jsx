@@ -1,16 +1,12 @@
 import { NavLink, useNavigate } from "react-router-dom"
 import { useAuth } from "../auth/hooks/useAuth"
 import { useSelector } from "react-redux";
-import { useRef } from "react";
 
 export const Navbar = () => {
 
     const { login, handlerLogout } = useAuth();  
 
     const { cartItems } = useSelector(state=>state.cart)
-
-    
-    const offcanvasRef = useRef();
 
     const navigate = useNavigate();
 
@@ -21,8 +17,7 @@ export const Navbar = () => {
                         data-bs-target="#nav" aria-controls="nav" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <h3 className="navbar-brand"><NavLink className="nav-link" to="/">Informatik</NavLink></h3>                
-
+                <h3 className="navbar-brand"><NavLink className="nav-link" to="/">Informatik</NavLink></h3>               
                 <div className="d-none d-lg-flex flex-grow-1 justify-content-between">
                     <div>
                         <ul className="navbar-nav">
@@ -42,12 +37,11 @@ export const Navbar = () => {
                                 <li className="nav-item">
                                     <NavLink className="nav-link item fs-5" to="/crear-producto">Crear Producto</NavLink>
                                 </li>
-                            }
-                                           
+                            }                                           
                         </ul>
                     </div>                    
                 </div> 
-                <div className="container-icons d-flex align-items-baseline">
+                <div className="container-icons d-flex align-items-center">
                     <ul className="navbar-nav">
                         { !login.isAuth && 
                             <li className="nav-item">
@@ -95,7 +89,7 @@ export const Navbar = () => {
 
                 {/* NAVBAR COLAPSADO */}
 
-                <div className="offcanvas offcanvas-start d-lg-none" ref={offcanvasRef} tabIndex="-1" id="nav" aria-labelledby="navLabel">
+                <div className="offcanvas offcanvas-start d-lg-none" tabIndex="-1" id="nav" aria-labelledby="navLabel">
                     <div className="offcanvas-header">
                         <h3 className="navbar-brand" id="navLabel">
                             <NavLink onClick={() =>navigate('/')} className="nav-link" data-bs-dismiss="offcanvas">
