@@ -21,7 +21,8 @@
     "react-hook-form": "^7.44.3",
     "react-redux": "^8.0.7",
     "react-router-dom": "^6.12.1",
-    "sweetalert2": "^11.7.12"
+    "sweetalert2": "^11.7.12",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",

@@ -1,5 +1,5 @@
 .cardModule {
-    width: calc(100%/3);
+    width: calc(100%/4);
     height: 31rem;
 }
 
@@ -31,6 +31,12 @@
     .cardModule {
         width: calc(100%/2);
         height: auto;
+    }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 576px) {
+    .cardModule {
+        width: calc(100%/3);
     }
 }
 
