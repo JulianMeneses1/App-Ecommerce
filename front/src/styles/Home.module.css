@@ -3,6 +3,12 @@
 }
 
 .banner {
-    width: 60em;
-    height: 20em;
+    height: 60vh;
+    object-fit: cover;    
+}
+
+@media screen and (max-width: 767px) and (min-width: 567px) {
+    .containerResponsive {
+        max-width: 100% !important;
+    }
 }

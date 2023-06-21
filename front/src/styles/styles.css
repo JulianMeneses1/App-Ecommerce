@@ -28,6 +28,9 @@ nav .nav-link{
     font-family: 'Permanent Marker', serif;
     font-size: 40px;
 }
+nav .navbar-toggler {
+    box-shadow: none !important;
+}
 
 nav, nav .dropdown-menu {
     background-color: #444455;
@@ -65,6 +68,34 @@ nav #cart {
     position: relative;
     width: 51px;
     height: 51px;
+}
+
+
+@media screen and (max-width: 992px) {
+    nav .navbar-brand {
+        padding: 0 15px;
+    }
+    nav h3 {
+        font-size: 30px !important;
+        margin: 0px !important
+    }  
+    nav .container-icons > ul {
+        flex-direction: row;
+        gap: 5px 
+    }
+    nav .container-icons {
+        margin-left: auto
+    }
+    nav .item:hover, nav svg:hover {   
+        transform: none;  
+    }
+    nav .offcanvas {
+        background-color:#444455;
+        width: 85vw !important;
+    }    
+    nav .offcanvas-body .nav-link:hover {
+        color:lightblue !important
+    }
 }
 
 /* Formulario Crear Producto */

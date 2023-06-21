@@ -1,15 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import styles from '../styles/Carousel.module.css'
 
-export const Carousel = ({ products, category }) => {    
-
-    const generateUniqueId = () => {
-        const timestamp = Date.now();
-        const random = Math.floor(Math.random() * 10000); 
-        return `${timestamp}-${random}`;
-      };
-
-    const carouselId = generateUniqueId();
+export const Carousel = ({ products, category }) => {      
    
     return (
         <>
@@ -20,7 +12,7 @@ export const Carousel = ({ products, category }) => {
                 <div id={category} className="carousel carousel-dark slide d-none d-sm-block" data-bs-ride="true">
                     
                     <div className="carousel-inner">
-                        <div className="carousel-item active" data-bs-interval="5000">
+                        <div className="carousel-item active" data-bs-interval="4000">
                             <div className="cards-wrapper d-flex gap-3">
                                 { products.slice(0,3).map((product) => (                                        
                                     <div key={`${product.id}`} className={`card ${styles.cardModule}`}>                                                                                                         
@@ -38,7 +30,7 @@ export const Carousel = ({ products, category }) => {
                                 }          
                             </div>
                         </div>
-                        <div className="carousel-item" data-bs-interval="5000">
+                        <div className="carousel-item" data-bs-interval="4000">
                              <div className="cards-wrapper d-flex gap-3">
                                  { products.slice(-3).map((product) => (      
                                      <div key={`${product.id}`} className={`card ${styles.cardModule}`}>                                                                                                         

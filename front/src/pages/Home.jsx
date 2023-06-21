@@ -32,13 +32,36 @@ export const Home = () => {
             </div>
         )
     }
-
+    
     return (
         <>
-            <div className=" my-3 d-flex justify-content-center">
-                <img src="https://www.herydes.es/_media/img/large/banner-generico1.jpg" className="img-fluid"/>
+            <div id="carouselBanner" className="carousel slide" data-bs-ride="carousel" data-bs-interval="4000" >
+                <div className="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselBanner" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselBanner" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselBanner" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselBanner" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                    <button type="button" data-bs-target="#carouselBanner" data-bs-slide-to="4" aria-label="Slide 4"></button>
+                </div>
+                <div className="carousel-inner">
+                    <div className="carousel-item active">
+                        <img className={`w-100 ${styles.banner}`} src="http://localhost:8080/files/Slide 1.jpg"  alt="Slide 1"/>   
+                    </div>
+                    <div className="carousel-item">
+                        <img className={`w-100 ${styles.banner}`} src="http://localhost:8080/files/Slide 2.jpg" alt="Slide 2"/>
+                    </div>
+                    <div className="carousel-item">
+                        <img className={`w-100 ${styles.banner}`} src="http://localhost:8080/files/Slide 3.jpg" alt="Slide 3"/>
+                    </div>
+                    <div className="carousel-item">
+                        <img className={`w-100 ${styles.banner}`} src="http://localhost:8080/files/Slide 4.jpg" alt="Slide 4"/>
+                    </div>
+                    <div className="carousel-item">
+                        <img className={`w-100 ${styles.banner}`} src="http://localhost:8080/files/Slide 5.jpg" alt="Slide 5"/>
+                    </div>
+                </div>            
             </div>
-            <div className="container my-4">
+            <div className={`container my-4  ${styles.containerResponsive}`}>
                 <div className="d-flex align-items-center">
                     <h4 className="m-0">¡Encuentra la notebook ideal para jugar o trabajar!</h4>
                     <NavLink className={`nav-link me-3 ${styles.navLink}`} to={'categoría/notebooks?page=0'}><p className="text-center ms-4 m-0">Ver lista</p></NavLink>

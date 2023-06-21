@@ -27,7 +27,7 @@
 
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 576px) {
     .cardModule {
         width: calc(100%/2);
         height: auto;

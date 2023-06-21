@@ -1,0 +1,33 @@
+.containerPage {
+    position: relative;
+    width: 45px;
+    border-radius: 100%;
+    height: 45px;  
+    background-color: #cacace;
+    margin: 0 5px;
+}
+.containerPage:hover {  
+    background-color: #787879;
+    color: white;
+}
+
+.containerPageSelected {
+    position: relative;
+    width: 45px;
+    border-radius: 100%;
+    height: 45px;  
+    background-color: #cacace;
+    margin: 0 5px;
+    background-color: #787879;
+    color: white;
+}
+
+.page {
+    margin: 0 20px;
+    top: 16%;
+    right: -5%;
+    font-size: 20px;
+    position: absolute;    
+}
+
+
