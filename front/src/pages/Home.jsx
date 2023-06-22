@@ -45,50 +45,50 @@ export const Home = () => {
                 </div>
                 <div className="carousel-inner">
                     <div className="carousel-item active">
-                        <img className={`w-100 ${styles.banner}`} src="http://localhost:8080/files/Slide 1.jpg"  alt="Slide 1"/>   
+                        <img className={`w-100 ${styles.banner}`} src="http://ec2-3-86-240-39.compute-1.amazonaws.com:8080/files/Slide%201.jpg"  alt="Slide 1"/>   
                     </div>
                     <div className="carousel-item">
-                        <img className={`w-100 ${styles.banner}`} src="http://localhost:8080/files/Slide 2.jpg" alt="Slide 2"/>
+                        <img className={`w-100 ${styles.banner}`} src="http://ec2-3-86-240-39.compute-1.amazonaws.com:8080/files/Slide%202.jpg" alt="Slide 2"/>
                     </div>
                     <div className="carousel-item">
-                        <img className={`w-100 ${styles.banner}`} src="http://localhost:8080/files/Slide 3.jpg" alt="Slide 3"/>
+                        <img className={`w-100 ${styles.banner}`} src="http://ec2-3-86-240-39.compute-1.amazonaws.com:8080/files/Slide%203.jpg" alt="Slide 3"/>
                     </div>
                     <div className="carousel-item">
-                        <img className={`w-100 ${styles.banner}`} src="http://localhost:8080/files/Slide 4.jpg" alt="Slide 4"/>
+                        <img className={`w-100 ${styles.banner}`} src="http://ec2-3-86-240-39.compute-1.amazonaws.com:8080/files/Slide%204.jpg" alt="Slide 4"/>
                     </div>
                     <div className="carousel-item">
-                        <img className={`w-100 ${styles.banner}`} src="http://localhost:8080/files/Slide 5.jpg" alt="Slide 5"/>
+                        <img className={`w-100 ${styles.banner}`} src="http://ec2-3-86-240-39.compute-1.amazonaws.com:8080/files/Slide%205.jpg" alt="Slide 5"/>
                     </div>
                 </div>            
             </div>
             <div className={`container my-4  ${styles.containerResponsive}`}>
                 <div className="d-flex align-items-center">
                     <h4 className="m-0">¡Encuentra la notebook ideal para jugar o trabajar!</h4>
-                    <NavLink className={`nav-link me-3 ${styles.navLink}`} to={'categoría/notebooks?page=0'}><p className="text-center ms-4 m-0">Ver lista</p></NavLink>
+                    <NavLink className={`nav-link me-3 ${styles.navLink}`} to={'categoría/notebooks?page=0'}><p style={{fontSize:"20px"}} className="text-center ms-4 m-0">Ver lista</p></NavLink>
                 </div>
                 <Carousel products = {productsHome.notebooks} />
                 
                 <div className="d-flex align-items-center">
                     <h4 className="m-0">PCs de escritorio full</h4>
-                    <NavLink className={`nav-link me-3 ${styles.navLink}`} to={'categoría/pcs?page=0'}><p className="text-center ms-4 m-0">Ver lista</p></NavLink>
+                    <NavLink className={`nav-link me-3 ${styles.navLink}`} to={'categoría/pcs?page=0'}><p style={{fontSize:"20px"}} className="text-center ms-4 m-0">Ver lista</p></NavLink>
                 </div>
                 <Carousel products = {productsHome.pcs} />
                 
                 <div className="d-flex align-items-center">
                     <h4 className="m-0">Aprovechá las nuevas tecnologías visuales</h4>
-                    <NavLink className={`nav-link me-3 ${styles.navLink}`} to={'categoría/monitores?page=0'}><p className="text-center ms-4 m-0">Ver lista</p></NavLink>
+                    <NavLink className={`nav-link me-3 ${styles.navLink}`} to={'categoría/monitores?page=0'}><p style={{fontSize:"20px"}} className="text-center ms-4 m-0">Ver lista</p></NavLink>
                 </div>
                 <Carousel products = {productsHome.monitores}/>
                 
                 <div className="d-flex align-items-center">
                     <h4 className="m-0">Es hora de potenciar tu computadora</h4>
-                    <NavLink className={`nav-link me-3 ${styles.navLink}`} to={'categoría/placasDeVideo?page=0'}><p className="text-center ms-4 m-0">Ver lista</p></NavLink>
+                    <NavLink className={`nav-link me-3 ${styles.navLink}`} to={'categoría/placasDeVideo?page=0'}><p style={{fontSize:"20px"}} className="text-center ms-4 m-0">Ver lista</p></NavLink>
                 </div>
                 <Carousel products = {productsHome.placasDeVideo} />
                 
                 <div className="d-flex align-items-center">
                     <h4 className="m-0">Mejorá el rendimiento de tu pc</h4>
-                    <NavLink className={`nav-link me-3 ${styles.navLink}`} to={'categoría/microprocesadores?page=0'}><p className="text-center ms-4 m-0">Ver lista</p></NavLink>
+                    <NavLink className={`nav-link me-3 ${styles.navLink}`} to={'categoría/microprocesadores?page=0'}><p style={{fontSize:"20px"}} className="text-center ms-4 m-0">Ver lista</p></NavLink>
                 </div>
                 <Carousel products = {productsHome.microprocesadores}/>
             </div>

@@ -5,6 +5,7 @@ target/classes/application.properties
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+ec2-backend.pem
 
 ### STS ###
 .apt_generated
