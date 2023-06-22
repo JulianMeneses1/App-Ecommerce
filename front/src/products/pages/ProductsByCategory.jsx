@@ -51,7 +51,7 @@ export const ProductsByCategory = () => {
                 <div className="d-flex gap-4 mb-3 flex-wrap justify-content-center">
                     { productsCategories[category].map((product) => (      
                         <div key={product.id} className={`card ${styles.cardModule}`}>                                                                                                         
-                            <NavLink  className="nav-link" to={`/producto/${product.category.name}/${product.title.replace(/[./ ]/g, "-")}/${product.id}`}>
+                            <NavLink title={product.title} className="nav-link" to={`/producto/${product.category.name}/${product.title.replace(/[./ ]/g, "-")}/${product.id}`}>
                                 <div className='card-container-img d-flex '>
                                     <img src={product.image} className="card-img-top"/> 
                                 </div>                                                                 
