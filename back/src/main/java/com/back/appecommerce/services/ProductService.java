@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface ProductService {
     public Product save (Product product);
+    public List<Product> saveAll (List <Product> products);
     public void delete (Long id);
     public List<Product> findAll();
     public Page<Product> findByCategory(Pageable pageable, Category category);

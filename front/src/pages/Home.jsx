@@ -66,31 +66,31 @@ export const Home = () => {
                     <h4 className="m-0">¡Encuentra la notebook ideal para jugar o trabajar!</h4>
                     <NavLink className={`nav-link me-3 ${styles.navLink}`} to={'categoría/notebooks?page=0'}><p className="text-center ms-4 m-0">Ver lista</p></NavLink>
                 </div>
-                <Carousel products = {productsHome.notebooks} category = "notebooks"/>
+                <Carousel products = {productsHome.notebooks} />
                 
                 <div className="d-flex align-items-center">
                     <h4 className="m-0">PCs de escritorio full</h4>
                     <NavLink className={`nav-link me-3 ${styles.navLink}`} to={'categoría/pcs?page=0'}><p className="text-center ms-4 m-0">Ver lista</p></NavLink>
                 </div>
-                <Carousel products = {productsHome.pcs} category = "pcs"/>
+                <Carousel products = {productsHome.pcs} />
                 
                 <div className="d-flex align-items-center">
                     <h4 className="m-0">Aprovechá las nuevas tecnologías visuales</h4>
                     <NavLink className={`nav-link me-3 ${styles.navLink}`} to={'categoría/monitores?page=0'}><p className="text-center ms-4 m-0">Ver lista</p></NavLink>
                 </div>
-                <Carousel products = {productsHome.monitores} category = "monitores"/>
+                <Carousel products = {productsHome.monitores}/>
                 
                 <div className="d-flex align-items-center">
                     <h4 className="m-0">Es hora de potenciar tu computadora</h4>
                     <NavLink className={`nav-link me-3 ${styles.navLink}`} to={'categoría/placasDeVideo?page=0'}><p className="text-center ms-4 m-0">Ver lista</p></NavLink>
                 </div>
-                <Carousel products = {productsHome.placasDeVideo} category = "placasDeVideo"/>
+                <Carousel products = {productsHome.placasDeVideo} />
                 
                 <div className="d-flex align-items-center">
                     <h4 className="m-0">Mejorá el rendimiento de tu pc</h4>
                     <NavLink className={`nav-link me-3 ${styles.navLink}`} to={'categoría/microprocesadores?page=0'}><p className="text-center ms-4 m-0">Ver lista</p></NavLink>
                 </div>
-                <Carousel products = {productsHome.microprocesadores} category = "microprocesadores"/>
+                <Carousel products = {productsHome.microprocesadores}/>
             </div>
             
         </>

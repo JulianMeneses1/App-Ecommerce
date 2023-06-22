@@ -2,12 +2,7 @@ import { NavLink } from 'react-router-dom';
 import styles from '../styles/Carousel.module.css';
 import { v4 as uuidv4 } from 'uuid';
 
-
-export const Carousel = ({ products, category }) => {  
-    
-    // const generateUniqueId = () => {
-    //     return `${category}_${Date.now()}`;
-    // }
+export const Carousel = ({ products }) => {  
 
     const carouselId = uuidv4();
    

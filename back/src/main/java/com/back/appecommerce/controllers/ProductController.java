@@ -76,7 +76,7 @@ public class ProductController {
     }
     
     @PostMapping
-    public ResponseEntity<?> createProducts(@Valid @RequestBody Product product, BindingResult result) {
+    public ResponseEntity<?> createProduct(@Valid @RequestBody Product product, BindingResult result) {
         if(result.hasErrors()){
             return validation(result);
         }
@@ -84,6 +84,14 @@ public class ProductController {
             return ResponseEntity.internalServerError().body("El título del producto ya existe");
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.save(product));
+    }
+    
+    @PostMapping("/list")
+    public ResponseEntity<?> createProducts(@Valid @RequestBody List <Product> products, BindingResult result) {
+        if(result.hasErrors()){
+            return validation(result);
+        }      
+        return ResponseEntity.status(HttpStatus.CREATED).body(productService.saveAll(products));
     }
     
     @PutMapping("/{id}")
