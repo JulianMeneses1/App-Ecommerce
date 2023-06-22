@@ -4,11 +4,11 @@
 
 @media screen and (min-width: 1400px) {
     .cardModule {
-        width: 20%;
+        width: 25%;
     }  
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 900px) and (max-width: 1400px) {
     .cardModule {
         width: 30%;
     }  

@@ -21,9 +21,9 @@ export const Carousel = ({ products }) => {
                                     <div key={`${product.id}`} className={`card ${styles.cardModule}`}>                                                                                                         
                                         <NavLink  className="nav-link" to={`/producto/${product.category.name}/${product.title.replace(/[./ ]/g, "-")}/${product.id}`}>
                                             <div className='card-container-img d-flex'>
-                                                <img src={product.image} className="card-img-top"/> 
+                                                <img src="http://localhost:8080/files/Notebook DELL.jpg" className="card-img-top"/> 
                                             </div>                                                                
-                                            <div className="card-body "> 
+                                            <div className="card-body"> 
                                                 <h4 className="card-text">{"$ " + product.price}</h4>                                    
                                                 <p className="card-title">{product.title}</p>
                                             </div>

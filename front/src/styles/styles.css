@@ -4,18 +4,20 @@ body {
     min-height: 100vh;
 }
 
-html {
-    min-width: min-content;
+/* Cards */
+
+.card-body {    
+    padding: 5px 16px;
 }
 
-.card .card-container-img {
-    height: 20rem;
+.card-body p {
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
 }
 
-.card-body {
-    height: 10rem;
-    padding-top: 3em;
-    overflow:hidden
+.card img {
+    max-height: 280px;
 }
 
 /* Navbar */
@@ -98,7 +100,7 @@ nav #cart {
     }
 }
 
-/* Formulario Crear Producto */
+/* Form New Product */
 
 .formCreateProduct {
     min-height: 70vh;
@@ -130,7 +132,7 @@ nav #cart {
     }
 }
 
-/* Formulario Login/Register */
+/* Form Login/Register */
 
 .formLogin {
     min-height: 70vh;
