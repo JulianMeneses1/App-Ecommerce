@@ -34,7 +34,7 @@ Here are the technologies and libraries used in the front of this project:
 #### Libraries
 * [Bootstrap](https://getbootstrap.com/): Version 5.3.0
 * [Axios](https://axios-http.com/docs/intro): Version 1.4.0
-* [Query-string](https://www.npmjs.com/package/query-string): Version ^8.1.0
+* [Query-string](https://www.npmjs.com/package/query-string): Version 8.1.0
 * [Paypal/react-paypal-js](https://www.npmjs.com/package/@paypal/react-paypal-js): Version 8.0.0
 * [React-bootstrap](https://react-bootstrap.netlify.app/): Version 2.7.4
 * [React-router-dom](https://reactrouter.com/en/main): Version 6.12.1
