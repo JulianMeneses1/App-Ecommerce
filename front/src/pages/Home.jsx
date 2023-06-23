@@ -35,7 +35,7 @@ export const Home = () => {
     
     return (
         <>
-            <div id="carouselBanner" className="carousel slide" data-bs-ride="carousel" data-bs-interval="4000" >
+            <div id="carouselBanner" className="carousel slide" data-bs-ride="carousel" data-bs-pause="false" data-bs-interval="4000" >
                 <div className="carousel-indicators">
                     <button type="button" data-bs-target="#carouselBanner" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
                     <button type="button" data-bs-target="#carouselBanner" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -45,19 +45,19 @@ export const Home = () => {
                 </div>
                 <div className="carousel-inner">
                     <div className="carousel-item active">
-                        <img className={`w-100 ${styles.banner}`} src="http://ec2-3-86-240-39.compute-1.amazonaws.com:8080/files/Slide%201.jpg"  alt="Slide 1"/>   
+                        <img className={`w-100 ${styles.banner}`} src={`${import.meta.env.VITE_API_BASE_URL}/files/Slide%201.jpg`}  alt="Slide 1"/>   
                     </div>
                     <div className="carousel-item">
-                        <img className={`w-100 ${styles.banner}`} src="http://ec2-3-86-240-39.compute-1.amazonaws.com:8080/files/Slide%202.jpg" alt="Slide 2"/>
+                        <img className={`w-100 ${styles.banner}`} src={`${import.meta.env.VITE_API_BASE_URL}/files/Slide%202.jpg`} alt="Slide 2"/>
                     </div>
                     <div className="carousel-item">
-                        <img className={`w-100 ${styles.banner}`} src="http://ec2-3-86-240-39.compute-1.amazonaws.com:8080/files/Slide%203.jpg" alt="Slide 3"/>
+                        <img className={`w-100 ${styles.banner}`} src={`${import.meta.env.VITE_API_BASE_URL}/files/Slide%203.jpg`} alt="Slide 3"/>
                     </div>
                     <div className="carousel-item">
-                        <img className={`w-100 ${styles.banner}`} src="http://ec2-3-86-240-39.compute-1.amazonaws.com:8080/files/Slide%204.jpg" alt="Slide 4"/>
+                        <img className={`w-100 ${styles.banner}`} src={`${import.meta.env.VITE_API_BASE_URL}/files/Slide%204.jpg`} alt="Slide 4"/>
                     </div>
                     <div className="carousel-item">
-                        <img className={`w-100 ${styles.banner}`} src="http://ec2-3-86-240-39.compute-1.amazonaws.com:8080/files/Slide%205.jpg" alt="Slide 5"/>
+                        <img className={`w-100 ${styles.banner}`} src={`${import.meta.env.VITE_API_BASE_URL}/files/Slide%205.jpg`} alt="Slide 5"/>
                     </div>
                 </div>            
             </div>
