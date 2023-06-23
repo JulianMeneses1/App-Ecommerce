@@ -1,7 +1,7 @@
 # Ecommerce Application
 ***
 ## 1. :notebook_with_decorative_cover: General Info
-This project is a dynamic website that simulates an ecommerce of informatic products. It has different categories and a cart, where you can load yor purchases. Besides it has a login with JWT, you can sign in as a user, to confirm and simulate a payment of the products in your cart, or as an admin, with the privilege to edit the products loaded in the store. 
+This project is a dynamic website that simulates an ecommerce of informatic products. It has different categories and a cart, where you can load yor purchases. Besides, it has a login with JWT, you can sign in as a user, to confirm and simulate a payment of the products in your cart, or as an admin, with the privilege to edit the products loaded in the store. 
 I created this project as a way to practice what I am learning, using Spring Boot for the back and React for the front. 
 
 Status: ACTIVE :heavy_check_mark:
@@ -23,6 +23,7 @@ Here are the technologies and dependencies used in the back of this project:
 * Validation
 * JsonWebToken
 * MySQL Driver
+* Spring Doc
 ### Front
 Here are the technologies and libraries used in the front of this project:
 #### Technologies
@@ -31,7 +32,16 @@ Here are the technologies and libraries used in the front of this project:
 * [npm](https://www.npmjs.com/): Version 9.5.1
 * [vite](https://vitejs.dev/): Version 4.3.9
 #### Libraries
-* [Bootstrap](https://getbootstrap.com/): Version 5.2.3
+* [Bootstrap](https://getbootstrap.com/): Version 5.3.0
+* [Axios](https://axios-http.com/docs/intro): Version 1.4.0
+* [Query-string](https://www.npmjs.com/package/query-string): Version 8.1.0
+* [Paypal/react-paypal-js](https://www.npmjs.com/package/@paypal/react-paypal-js): Version 8.0.0
+* [React-bootstrap](https://react-bootstrap.netlify.app/): Version 2.7.4
+* [React-router-dom](https://reactrouter.com/en/main): Version 6.12.1
+* [React-hook-form](https://react-hook-form.com/): Version 7.44.3
+* [React-redux](https://react-redux.js.org/): Version 8.0.7
+* [Sweetalert2](https://www.npmjs.com/package/sweetalert2): Version 11.7.12
+* [uuid](https://www.npmjs.com/package/uuid): Version 9.0.0
 ## 3. :hammer_and_wrench: Installation
 ***
 ### Back
@@ -53,33 +63,62 @@ Great, all the configuration is set up, now you can run the server. :warning: Re
 ### Front
 
 First of all you need to install NodeJS, for that go the official page of NodeJS (https://nodejs.org/es) and follow the instructions to install this technologie in your system, which includes npm. 
-Then, using npm, you have to install Angular CLI with the next command:
-  ```
-  npm install -g @angular/cli@latest
-  ```
-After this you need to install in your proyect the basic libraries with this command:
+Then, using npm, you have to install the libraries used in this proyect Angular with the next command:
 ```
   npm install
  ```
-Great, now you only need to install the libraries that are used in this project. Here you have the respective command for each one:
+In case that some librarie doesn't get installed, don't worry here I leave you the respective command to install every one:
 
-**FontAwesome**
+**Bootstrap**
 ```
-  npm install @fortawesome/angular-fontawesome@0.12.x
+  npm install @bootstrap
 ```
-**Chart.js**
+**Axios**
 ```
-  npm install chart.js
+  npm install axios
+```
+**Paypal**
+```
+  npm install @paypal/react-paypal-js
+```
+**Redux**
+```
+  npm install @reduxjs/toolkit
+  npm install react-redux
+```
+**Query-string**
+```
+  npm install query-string
+```
+**React-Bootstrap**
+```
+  npm install react-bootstrap
+```
+**React-Router-Dom**
+```
+  npm install react-router-dom
+```
+**SweetAlert 2**
+```
+  npm install sweetalert2
+```
+**uuid**
+```
+  npm install uuid
+```
+**React Hook Form**
+```
+  npm install react-hook-form
 ```
 :heavy_check_mark: Now you are ready to run your project locally in an test enviroment with this command:
 ```
-  ng serve
+  npm run dev
 ```
-:warning: Remember that all the data is loaded from the Back End server, so you need to start the Back End server first to be able to see the data and successfully run the app. For more information visit the back end [repository](https://github.com/JulianMeneses1/Portafolio-BackEnd-AP)
+:warning: Remember that all the data is loaded from the Back End server, so you need to start the Back End server first to be able to see the data and successfully run the app.
 
 ## 4. :information_source: API Documentation Swagger
 ***
-Check the full documentation of the API in this [link](https://app-personas-production.up.railway.app/swagger-ui/index.html)
+Check the full documentation of the API in this [link](https://app-ecommerce-production-59a9.up.railway.app/swagger-ui/index.html)
 
 ## 5. :wave: Collaboration
 ***
