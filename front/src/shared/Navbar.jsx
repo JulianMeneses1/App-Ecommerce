@@ -14,7 +14,7 @@ export const Navbar = () => {
         <nav className="navbar navbar-expand-lg">
             <div className="container-fluid">
                 <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" 
-                        data-bs-target="#nav" aria-controls="nav" aria-label="Toggle navigation">
+                        data-bs-target="#nav" aria-controls="nav" aria-label="Toggle navigation" style={{backgroundColor:"gray"}}>
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <h3 className="navbar-brand"><NavLink className="nav-link" to="/">Informatik</NavLink></h3>               
