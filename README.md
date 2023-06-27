@@ -118,7 +118,7 @@ In case that some librarie doesn't get installed, don't worry here I leave you t
 
 ## 4. :information_source: API Documentation Swagger
 ***
-Check the full documentation of the API in this [link](https://app-ecommerce-production-59a9.up.railway.app/swagger-ui/index.html)
+Check the full documentation of the API in this [link](http://ec2-3-86-240-39.compute-1.amazonaws.com:8080/swagger-ui/index.html)
 
 ## 5. :wave: Collaboration
 ***
